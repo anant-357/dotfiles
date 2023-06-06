@@ -3,7 +3,7 @@ local wibox                 = require("wibox")
 local functions             = require("functions")
 local wibar_widget_enhancor = functions.wi_widget_enhancor
 local wibar_widget_shape    = functions.wi_widget_shape
-local lain                  = require("lain")
+local backend                  = require("backend")
 local colors                = require("colorschemes.gruvbox")
 
 local function volicon_function(args)
@@ -13,7 +13,7 @@ local function volicon_function(args)
     local volicon_containerized = wibar_widget_enhancor(volicon, colors.dark_gray)
     volicon.font                = "Symbols Nerd Font Mono 12"
     local volume_status         = {}
-    local volume                = lain.widget.pulse({
+    local volume                = backend.widget.pulse({
         timeout = 0.1,
         settings = function()
             if volume_now.muted == "yes" then
@@ -38,7 +38,7 @@ local function volicon_function(args)
         fg = colors.dark_green,
         shape = wibar_widget_shape,
         timer_function = function()
-            return lain.util.markup.font("FiraCode Nerd Font Mono, Medium 10",
+            return backend.util.markup.font("FiraCode Nerd Font Mono, Medium 10",
                 string.format("Volume: %s&#37;\n", volume_status.left))
         end
     }

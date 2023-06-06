@@ -3,7 +3,7 @@ local wibox                 = require("wibox")
 local functions             = require("functions")
 local wibar_widget_enhancor = functions.wi_widget_enhancor
 local wibar_widget_shape    = functions.wi_widget_shape
-local lain                  = require("lain")
+local backend                  = require("backend")
 local colors                = require("colorschemes.gruvbox")
 local spr                   = wibox.widget.textbox('  ')
 
@@ -32,7 +32,7 @@ local spotify_all_containerized = wibar_widget_enhancor(spotify_all, colors.dark
 
 local spot_t_now                = {}
 
-local spotify                   = lain.widget.spotify({
+local spotify                   = backend.widget.spotify({
     timeout = 1,
     settings = function()
         if spotify_now.status == "on" then
@@ -72,9 +72,9 @@ local spotify_t           = awful.tooltip {
     shape = wibar_widget_shape,
     timer_function = function()
         if spot_t_now.status == "off" then
-            return lain.util.markup.font("Fira Code, Medium 10", "Spotify not running")
+            return backend.util.markup.font("Fira Code, Medium 10", "Spotify not running")
         end
-        local ret = lain.util.markup.font("FiraCode Nerd Font Mono, Medium 10",
+        local ret = backend.util.markup.font("FiraCode Nerd Font Mono, Medium 10",
             string.format("Song: %s\nArtist: %s\nAlbum: %s\n%s", spot_t_now.title, spot_t_now.artist, spot_t_now.album,
                 spot_t_now.playing))
         return ret
@@ -88,9 +88,9 @@ local spotify_next_song_t = awful.tooltip {
     shape = wibar_widget_shape,
     timer_function = function()
         if spot_t_now.status == "off" then
-            return lain.util.markup.font("Fira Code, Medium 10", "Spotify not running")
+            return backend.util.markup.font("Fira Code, Medium 10", "Spotify not running")
         end
-        local ret = lain.util.markup.font("FiraCode Nerd Font Mono, Medium 10", "Next Song")
+        local ret = backend.util.markup.font("FiraCode Nerd Font Mono, Medium 10", "Next Song")
         return ret
     end
 }
@@ -102,9 +102,9 @@ local spotify_prev_song_t = awful.tooltip {
     shape = wibar_widget_shape,
     timer_function = function()
         if spot_t_now.status == "off" then
-            return lain.util.markup.font("Fira Code, Medium 10", "Spotify not running")
+            return backend.util.markup.font("Fira Code, Medium 10", "Spotify not running")
         end
-        local ret = lain.util.markup.font("FiraCode Nerd Font Mono, Medium 10", "Previous Song")
+        local ret = backend.util.markup.font("FiraCode Nerd Font Mono, Medium 10", "Previous Song")
         return ret
     end
 }

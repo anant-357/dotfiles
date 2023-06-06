@@ -3,7 +3,7 @@ local wibox                 = require("wibox")
 local functions             = require("functions")
 local wibar_widget_enhancor = functions.wi_widget_enhancor
 local wibar_widget_shape    = functions.wi_widget_shape
-local lain                  = require("lain")
+local backend                  = require("backend")
 local colors                = require("colorschemes.gruvbox")
 
 
@@ -16,7 +16,7 @@ local function bluetooth_icon_function(args)
 
     local bluetooth_icon_containerized = wibar_widget_enhancor(bluetooth_icon, colors.dark_blue)
 
-    local bluetooth                    = lain.widget.bluetooth({
+    local bluetooth                    = backend.widget.bluetooth({
         timeout = 1,
         settings = function()
             if bluetooth_now.status == "on" then

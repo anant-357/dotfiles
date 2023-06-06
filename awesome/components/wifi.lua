@@ -3,7 +3,7 @@ local wibox                 = require("wibox")
 local functions             = require("functions")
 local wibar_widget_enhancor = functions.wi_widget_enhancor
 local wibar_widget_shape    = functions.wi_widget_shape
-local lain                  = require("lain")
+local backend                  = require("backend")
 local colors                = require("colorschemes.gruvbox")
 
 local function neticon_function(args)
@@ -15,7 +15,7 @@ local function neticon_function(args)
 
     local net_status            = {}
 
-    local net                   = lain.widget.net({
+    local net                   = backend.widget.net({
         timeout = 2,
         notify = "off",
         wifi_state = "on",
@@ -65,7 +65,7 @@ local function neticon_function(args)
         fg = colors.foreground,
         shape = wibar_widget_shape,
         timer_function = function()
-            return lain.util.markup.font("FiraCode Nerd Font Mono, Medium 10",
+            return backend.util.markup.font("FiraCode Nerd Font Mono, Medium 10",
                 string.format("%s\nDownload: %02.1f Mbps\nUpload: %02.1f Mbps", net_status.info,
                     net_status.recieved / 1024,
                     net_status.sent / 1024

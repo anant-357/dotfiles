@@ -6,8 +6,6 @@ local awful                 = require("awful")
 local wibox                 = require("wibox")
 local functions             = require("functions")
 local wibar_widget_enhancor = functions.wi_widget_enhancor
-local wibar_widget_shape    = functions.wi_widget_shape
-local lain                  = require("lain")
 local colors                = require("colorschemes.gruvbox")
 
 
