@@ -3,7 +3,7 @@ local wibox                 = require("wibox")
 local functions             = require("functions")
 local wibar_widget_enhancor = functions.wi_widget_enhancor
 local wibar_widget_shape    = functions.wi_widget_shape
-local lain                  = require("lain")
+local backend                  = require("backend")
 local colors                = require("colorschemes.gruvbox")
 
 
@@ -18,7 +18,7 @@ local function baticon_function(args)
 
     local bat_status = {}
 
-    local bat        = lain.widget.bat({
+    local bat        = backend.widget.bat({
         timeout = 2,
         notify = "off",
         settings = function()
@@ -68,9 +68,9 @@ local function baticon_function(args)
         timer_function = function()
             local msg = ""
             msg = msg ..
-                lain.util.markup.font("FiraCode Nerd Font Mono, Medium 10",
+                backend.util.markup.font("FiraCode Nerd Font Mono, Medium 10",
                     string.format("%s %s&#37;\n", bat_status.status, bat_status.perc))
-            return msg .. lain.util.markup.font("FiraCode Nerd Font Mono, Medium 10", bat_status.time .. " left")
+            return msg .. backend.util.markup.font("FiraCode Nerd Font Mono, Medium 10", bat_status.time .. " left")
         end
     }
     if container_bool == "yes" then
