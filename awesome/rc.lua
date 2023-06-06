@@ -7,7 +7,7 @@ local awful = require("awful")
 require("awful.autofocus")
 local beautiful     = require("beautiful")
 local naughty       = require("naughty")
-local lain          = require("lain")
+local backend          = require("backend")
 local hotkeys_popup = require("awful.hotkeys_popup")
 require("awful.hotkeys_popup.keys")
 local mytable = awful.util.table or gears.table -- 4.{0,1} compatibility
@@ -139,9 +139,9 @@ globalkeys = mytable.join(
         { description = "go back", group = "tag" }),
 
     -- Non-empty tag browsing
-    awful.key({ altkey }, "Left", function() lain.util.tag_view_nonempty(-1) end,
+    awful.key({ altkey }, "Left", function() backend.util.tag_view_nonempty(-1) end,
         { description = "view  previous nonempty", group = "tag" }),
-    awful.key({ altkey }, "Right", function() lain.util.tag_view_nonempty(1) end,
+    awful.key({ altkey }, "Right", function() backend.util.tag_view_nonempty(1) end,
         { description = "view  previous nonempty", group = "tag" }),
 
     -- Default client focus
@@ -220,9 +220,9 @@ globalkeys = mytable.join(
         { description = "toggle wibox", group = "awesome" }),
 
     -- On-the-fly useless gaps change
-    awful.key({ altkey, "Control" }, "=", function() lain.util.useless_gaps_resize(1) end,
+    awful.key({ altkey, "Control" }, "=", function() backend.util.useless_gaps_resize(1) end,
         { description = "increment useless gaps", group = "tag" }),
-    awful.key({ altkey, "Control" }, "-", function() lain.util.useless_gaps_resize(-1) end,
+    awful.key({ altkey, "Control" }, "-", function() backend.util.useless_gaps_resize(-1) end,
         { description = "decrement useless gaps", group = "tag" }),
 
 
@@ -237,15 +237,15 @@ globalkeys = mytable.join(
 
 
     -- Dynamic tagging
-    awful.key({ modkey, "Shift" }, "n", function() lain.util.add_tag() end,
+    awful.key({ modkey, "Shift" }, "n", function() backend.util.add_tag() end,
         { description = "add new tag", group = "tag" }),
-    awful.key({ modkey, "Shift" }, "r", function() lain.util.rename_tag() end,
+    awful.key({ modkey, "Shift" }, "r", function() backend.util.rename_tag() end,
         { description = "rename tag", group = "tag" }),
-    awful.key({ modkey, "Shift" }, "Left", function() lain.util.move_tag(-1) end,
+    awful.key({ modkey, "Shift" }, "Left", function() backend.util.move_tag(-1) end,
         { description = "move tag to the left", group = "tag" }),
-    awful.key({ modkey, "Shift" }, "Right", function() lain.util.move_tag(1) end,
+    awful.key({ modkey, "Shift" }, "Right", function() backend.util.move_tag(1) end,
         { description = "move tag to the right", group = "tag" }),
-    awful.key({ modkey, "Shift" }, "d", function() lain.util.delete_tag() end,
+    awful.key({ modkey, "Shift" }, "d", function() backend.util.delete_tag() end,
         { description = "delete tag", group = "tag" }),
 
     -- Standard program
