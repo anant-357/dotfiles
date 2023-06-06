@@ -5,6 +5,6 @@ Desktop Environment : AwesomeWM<br/>
 Status Bar          : Awesome Wibar<br/>
 Application Launcher: Rofi<br/>
 
-Shell               : Zsh
+Shell               : Zsh<br/>
 Terminal            : Kitty
 
