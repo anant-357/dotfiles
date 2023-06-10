@@ -15,7 +15,7 @@ local function arch_icon_dynamic(args)
 
     local arch_icon_status = "mask"
 
-    local arch_icon_single = wibar_widget_enhancor(arch_icon, colors.dark_gray)
+    local arch_icon_single = wibar_widget_enhancor(arch_icon, colors.dark_aqua)
     local arch_icon_double = wibar_widget_enhancor(
         wibar_widget_enhancor(arch_icon, "#1d2021"), colors.dark_gray
 
