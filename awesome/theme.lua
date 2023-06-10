@@ -53,40 +53,63 @@ local wibar_widget_enhancor = functions.wi_widget_enhancor
 
 
 -- Arch Icon  󰚌󰚀󰊠
-local arch_icon                = components.arch_ico({ icon = "󰊠", containers = "single" })
+local arch_icon  = components.arch_ico({ icon = "󰊠", containers = "single" })
 
 -- Clock
-local time                     = components.time_ico({ container = "yes" })
+local time       = components.time_ico({ container = "yes" })
 
 -- Spotify
-local spotify                  = components.spotify_all
-
--- Net
-local net                      = components.wifi_ico({ container = "no" })
-
--- Bluetooth 󰂯󰂰󰂱󰂲󰂳󰂴󰍬󰍭 󰤾󰤿󰥀󰥁󰥂󰥃󰥄󰥅󰥆󰥇󰥈󰥉󰥊
-local bluetooth                = components.blue_ico({ container = "no" })
+local spotify    = components.spotify_all
 
 -- ALSA volume
-local volume                   = components.vol_ico({ container = "no" })
+local volume     = components.vol_ico({ container = "no" })
 
-local future_all               = wibox.widget {
+local webcam     = components.webcam({ container = "no" })
+
+local microphone = components.microphone({ container = "no" })
+
+
+local multimedia_all               = wibox.widget {
     spr,
-    net,
-    spr,
-    bluetooth,
+    webcam,
     spr,
     volume,
+    spr,
+    microphone,
     spr,
     layout = wibox.layout.fixed.horizontal
 }
 
-local future_all_containerized = wibar_widget_enhancor(future_all, theme.colors.dark_blue)
+local multimedia_all_containerized = wibar_widget_enhancor(multimedia_all, theme.colors.dark_yellow)
+
+-- Net
+local ethernet                     = components.ethernet({ container = "no" })
+
+-- Net
+local wifi                         = components.wifi_ico({ container = "no" })
+
+-- Bluetooth 󰂯󰂰󰂱󰂲󰂳󰂴󰍬󰍭 󰤾󰤿󰥀󰥁󰥂󰥃󰥄󰥅󰥆󰥇󰥈󰥉󰥊
+local bluetooth                    = components.blue_ico({ container = "no" })
+
+local future_all                   = wibox.widget {
+    spr,
+    ethernet,
+    spr,
+    wifi,
+    spr,
+    bluetooth,
+    spr,
+    layout = wibox.layout.fixed.horizontal
+}
+
+local future_all_containerized     = wibar_widget_enhancor(future_all, theme.colors.dark_blue)
+
+local screenshot                   = components.screenshot({ container = "no" })
 
 -- Battery
-local battery                  = components.bat_ico({ container = "no" })
+local battery                      = components.bat_ico({ container = "no" })
 
-local leave                    = components.leave_ico({ container = "yes" })
+local leave                        = components.leave_ico({ container = "yes" })
 
 
 function theme.at_screen_connect(s)
@@ -107,7 +130,7 @@ function theme.at_screen_connect(s)
     s.statusbar = awful.wibar({
         position = "top",
         screen = s,
-        height = dpi(32),
+        height = dpi(34),
         bg = theme.bg_normal,
         fg = theme.fg_normal,
         border_width = 4,
@@ -116,11 +139,26 @@ function theme.at_screen_connect(s)
 
     local battile_all = wibox.widget {
         spr,
+        screenshot,
+        spr,
+        spr,
         battery,
         spr,
         s.mylayoutbox,
         spr,
         layout = wibox.layout.fixed.horizontal
+    }
+
+    local prompt_box_icon = wibox.widget.textbox("󰗣")
+    prompt_box_icon.font = "Symbols Nerd Font Mono 11"
+
+    local prompt_box = wibox.widget {
+        spr,
+        prompt_box_icon,
+        spr,
+        s.mypromptbox,
+        layout = wibox.layout.fixed.horizontal
+
     }
 
     local battile_all_containerized = wibar_widget_enhancor(battile_all, theme.colors.dark_orange)
@@ -134,9 +172,9 @@ function theme.at_screen_connect(s)
                 spr,
                 arch_icon,
                 spr,
-                wibar_widget_enhancor(s.mytaglist, theme.colors.dark_gray),
+                wibar_widget_enhancor(s.mytaglist, theme.colors.background_2),
                 spr,
-                wibar_widget_enhancor(s.mypromptbox, theme.colors.dark_gray),
+                wibar_widget_enhancor(prompt_box, theme.colors.background),
                 spr,
             },
             {
@@ -150,6 +188,8 @@ function theme.at_screen_connect(s)
                 spr,
                 spotify,
                 spr,
+                multimedia_all_containerized,
+                spr,
                 future_all_containerized,
                 spr,
                 battile_all_containerized,
@@ -162,10 +202,10 @@ function theme.at_screen_connect(s)
     }
 end
 
-awful.spawn.with_shell("picom --config ~/.config/awesome/picom-jonaburg.conf -b")
-awful.spawn.with_shell(
-    "xautolock -time 10 -notify 5 -notifier '/usr/lib/xsecurelock/until_nonidle /usr/lib/xsecurelock/dimmer' -locker xsecurelock")
-awful.spawn.with_shell("pamixer --toggle-mute")
+-- awful.spawn.with_shell("picom --config ~/.config/awesome/picom-jonaburg.conf -b")
+-- awful.spawn.with_shell(
+--     "xautolock -time 10 -notify 5 -notifier '/usr/lib/xsecurelock/until_nonidle /usr/lib/xsecurelock/dimmer' -locker xsecurelock")
+-- awful.spawn.with_shell("pamixer --toggle-mute")
 awful.spawn.with_shell("pamixer --toggle-mute")
 
 
