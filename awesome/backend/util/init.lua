@@ -62,7 +62,6 @@ function util.magnify_client(c, width_f, height_f)
     end
 end
 
--- https://github.com/lcpz/lain/issues/195
 function util.mc(c, width_f, height_f)
     c = c or util.magnified_client
     if not c then return end
