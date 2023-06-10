@@ -29,7 +29,7 @@ local function arch_icon_dynamic(args)
 
     arch_icon_containerized:buttons(awful.util.table.join(
         awful.button({}, 1, function()
-            awful.util.spawn("kitty")
+            awful.spawn.easy_async("code /home/vix/dotfiles", function(s) end)
         end),
         awful.button({}, 3, function()
             if arch_icon_status == "mask" then
