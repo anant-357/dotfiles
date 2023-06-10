@@ -3,7 +3,7 @@ local wibox                 = require("wibox")
 local functions             = require("functions")
 local wibar_widget_enhancor = functions.wi_widget_enhancor
 local wibar_widget_shape    = functions.wi_widget_shape
-local backend                  = require("backend")
+local backend               = require("backend")
 local colors                = require("colorschemes.gruvbox")
 
 
@@ -28,7 +28,7 @@ local function baticon_function(args)
                         baticon:set_text('')
                         baticon:set_font('Symbols Nerd Font Mono 11')
                     else
-                        baticon:set_text('󰂉')
+                        baticon:set_text('')
                     end
                 else
                     if tonumber(bat_now.perc) > 0 and tonumber(bat_now.perc) <= 5 then
