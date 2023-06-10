@@ -7,7 +7,7 @@ local awful = require("awful")
 require("awful.autofocus")
 local beautiful     = require("beautiful")
 local naughty       = require("naughty")
-local backend          = require("backend")
+local backend       = require("backend")
 local hotkeys_popup = require("awful.hotkeys_popup")
 require("awful.hotkeys_popup.keys")
 local mytable = awful.util.table or gears.table -- 4.{0,1} compatibility
@@ -283,33 +283,43 @@ globalkeys = mytable.join(
 
 
     -- Screen brightness
-    awful.key({}, "XF86MonBrightnessUp", function() os.execute("xbacklight -inc 1.5") end,
+    awful.key({}, "XF86MonBrightnessUp", function()
+            os.execute("xbacklight -inc 1.5")
+            awesome.emit_signal("brightness_change")
+        end,
         { description = "+1.5%", group = "hotkeys" }),
-    awful.key({}, "XF86MonBrightnessDown", function() os.execute("xbacklight -dec 1.5") end,
+    awful.key({}, "XF86MonBrightnessDown", function()
+            os.execute("xbacklight -dec 1.5")
+            awesome.emit_signal("brightness_change")
+        end,
         { description = "-1.5%", group = "hotkeys" }),
 
     -- Volume
     awful.key({}, "XF86AudioRaiseVolume",
         function()
             os.execute("pamixer --allow-boost --increase 7")
+            awesome.emit_signal("volume_bar_change")
         end,
         { description = "Increase Volume by 7", group = "hotkeys" }),
 
     awful.key({}, "XF86AudioLowerVolume",
         function()
             os.execute("pamixer --allow-boost --decrease 7")
+            awesome.emit_signal("volume_bar_change")
         end,
         { description = "Decrease Volume by 7", group = "hotkeys" }),
 
     awful.key({}, "XF86AudioMute",
         function()
             os.execute("pamixer --toggle-mute")
+            awesome.emit_signal("volume_bar_change")
         end,
         { description = "Mute/Unmute the Speaker", group = "hotkeys" }),
 
-    awful.key({}, "XF86AudioMicMute",
+    awful.key({}, "#198",
         function()
-            os.execute("pamixer --toggle-mute")
+            os.execute("amixer set Capture toggle")
+            awesome.emit_signal("volume_bar_change")
         end,
         { description = "Mute/Unmute Microphone", group = "hotkeys" }),
 
@@ -323,19 +333,22 @@ globalkeys = mytable.join(
         { description = "copy gtk to terminal", group = "hotkeys" }),
 
     -- User programs
-    awful.key({ modkey }, "q", function() awful.spawn(browser) end,
+    awful.key({ modkey }, "q", function() awful.spawn.easy_async(browser) end,
         { description = "run browser", group = "launcher" }),
-    awful.key({ modkey }, "x", function() awful.spawn("code") end,
+    awful.key({ modkey }, "x", function() awful.spawn.easy_async("code") end,
         { description = "run vscode", group = "launcher" }),
-    awful.key({ modkey }, "e", function() awful.spawn("thunar") end,
+    awful.key({ modkey }, "e", function() awful.spawn.easy_async("thunar") end,
         { description = "run explorer", group = "launcher" }),
-    awful.key({ modkey }, "d", function() awful.spawn("discord") end,
+    awful.key({ modkey }, "d", function() awful.spawn.easy_async("discord") end,
         { description = "run discord", group = "launcher" }),
-    awful.key({ modkey }, "s", function() awful.spawn("spotify") end,
+    awful.key({ modkey }, "s", function() awful.spawn.easy_async("spotify") end,
         { description = "run spotify", group = "launcher" }),
     awful.key({ modkey }, "r",
         function() awful.spawn("sh /home/vix/.config/rofi/launchers/launcher.sh") end,
-        { description = "run rofi desktop applications", group = "launcher" })
+        { description = "run rofi desktop applications", group = "launcher" }),
+    awful.key({ modkey, "Shift" }, "s",
+        function() awful.spawn.with_shell("sh /home/vix/dotfiles/awesome/screenshot.sh") end,
+        { description = "capture selection screenshot", group = "launcher" })
 
 
 
@@ -510,4 +523,5 @@ client.connect_signal("unmanage", backham)
 -- ensure there is always a selected client during tag switching or logins
 tag.connect_signal("property::selected", backham)
 
+local brightness = require("components").brightness
 -- }}}
