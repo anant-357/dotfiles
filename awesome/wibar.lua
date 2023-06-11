@@ -8,6 +8,7 @@ local beautiful             = require("beautiful")
 local dpi                   = require("beautiful.xresources").apply_dpi
 
 local spr                   = wibox.widget.textbox(' ')
+spr.font                    = "Fira Code, Medium 7"
 
 local wibar_widget_enhancor = functions.wi_widget_enhancor
 
