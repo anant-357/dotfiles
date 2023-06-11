@@ -109,6 +109,8 @@ local screenshot                   = components.screenshot({ container = "no" })
 -- Battery
 local battery                      = components.bat_ico({ container = "no" })
 
+local rgb                          = components.rgb_keyboard({ container = "no" })
+
 local leave                        = components.leave_ico({ container = "yes" })
 
 
@@ -141,6 +143,8 @@ function theme.at_screen_connect(s)
         spr,
         screenshot,
         spr,
+        spr,
+        rgb,
         spr,
         battery,
         spr,
@@ -193,6 +197,7 @@ function theme.at_screen_connect(s)
                 future_all_containerized,
                 spr,
                 battile_all_containerized,
+                spr,
                 spr,
                 leave,
                 spr
