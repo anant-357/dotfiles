@@ -5,7 +5,7 @@ local wibar_widget_enhancor = functions.wi_widget_enhancor
 local wibar_widget_shape    = functions.wi_widget_shape
 local backend               = require("backend")
 local colors                = require("colorschemes.gruvbox")
-local spr                   = wibox.widget.textbox('  ')
+local spr                   = wibox.widget.textbox(' ')
 
 
 local spotify_icon           = wibox.widget.textbox("󰽳")
