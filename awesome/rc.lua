@@ -333,15 +333,17 @@ globalkeys = mytable.join(
         { description = "copy gtk to terminal", group = "hotkeys" }),
 
     -- User programs
-    awful.key({ modkey }, "q", function() awful.spawn.easy_async(browser) end,
+    awful.key({ modkey }, "q", function()
+            awful.spawn.easy_async(browser, function() end)
+        end,
         { description = "run browser", group = "launcher" }),
-    awful.key({ modkey }, "x", function() awful.spawn.easy_async("code") end,
+    awful.key({ modkey }, "x", function() awful.spawn.easy_async("code", function() end) end,
         { description = "run vscode", group = "launcher" }),
-    awful.key({ modkey }, "e", function() awful.spawn.easy_async("thunar") end,
+    awful.key({ modkey }, "e", function() awful.spawn.easy_async("thunar", function() end) end,
         { description = "run explorer", group = "launcher" }),
-    awful.key({ modkey }, "d", function() awful.spawn.easy_async("discord") end,
+    awful.key({ modkey }, "d", function() awful.spawn.easy_async("discord", function() end) end,
         { description = "run discord", group = "launcher" }),
-    awful.key({ modkey }, "s", function() awful.spawn.easy_async("spotify") end,
+    awful.key({ modkey }, "s", function() awful.spawn.easy_async("spotify", function() end) end,
         { description = "run spotify", group = "launcher" }),
     awful.key({ modkey }, "r",
         function() awful.spawn("sh /home/vix/.config/rofi/launchers/launcher.sh") end,
