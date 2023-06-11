@@ -8,13 +8,13 @@ local colors                = require("colorschemes.gruvbox")
 local function screenshot_icon(args)
     local container_bool                = args.container or "no"
     local screenshot_icon               = wibox.widget.textbox('󰆟')
-    screenshot_icon.font                = "Symbols Nerd Font Mono 12"
+    screenshot_icon.font                = "Symbols Nerd Font Mono 11"
 
     local screenshot_icon_containerized = wibar_widget_enhancor(screenshot_icon, colors.dark_purple)
 
     screenshot_icon:buttons(awful.util.table.join(
         awful.button({}, 1, function()
-            awful.spawn("scrot -s -e 'xclip -selection clipboard -t image/png -i $f'")
+            awful.util.spawn_with_shell("scrot -s -e 'xclip -selection clipboard -t image/png -i $f'")
         end)
     ))
 
