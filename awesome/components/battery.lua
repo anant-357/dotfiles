@@ -25,8 +25,8 @@ local function baticon_function(args)
             if bat_now.status and bat_now.status ~= "N/A" then
                 if bat_now.ac_status == 1 then
                     if tonumber(bat_now.perc) == 100 then
-                        baticon:set_text('')
-                        baticon:set_font('Symbols Nerd Font Mono 11')
+                        baticon:set_text('') --
+                        baticon:set_font('Symbols Nerd Font Mono,Bold 12')
                     else
                         baticon:set_text('')
                     end
