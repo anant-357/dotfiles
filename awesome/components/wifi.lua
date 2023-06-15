@@ -53,6 +53,22 @@ local function neticon_function(args)
                 ))
         end
     }
+
+    neticon:buttons(awful.util.table.join(
+        awful.button({}, 1, function()
+            awful.spawn.with_shell("zsh /home/vix/.config/rofi/wifi/wifi.sh", function() end)
+        end),
+
+        awful.button({}, 3, function()
+            awful.spawn.easy_async("nmcli -fields WIFI g | grep 'enabled'", function(s)
+                if s == "enabled" then
+                    awful.util.spawn("nmcli radio wifi on")
+                else
+                    awful.util.spawn("nmcli radio wifi off")
+                end
+            end)
+        end)
+    ))
     if container_bool == "yes" then
         return neticon_containerized
     else
