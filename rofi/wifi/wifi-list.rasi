@@ -1,0 +1,100 @@
+* {
+    background:     #282828FF;
+    background-alt: #353535FF;
+    foreground:     #EBDBB2FF;
+    foreground-alt: #a89984FF;
+    selected:       #83A598FF;
+    active:         #B8BB26FF;
+    urgent:         #FB4934FF;
+}
+
+configuration {
+    font: "Fira Code, Medium 11";
+}
+
+window {
+    location:   northeast;
+    y-offset: 43px;
+    x-offset: -42px;
+    width:      10%;
+    border: 3px;
+    border-color: #a89984FF;
+    children:   [ mainbox ];
+}
+
+#mainbox {
+    orientation: vertical;
+    children:   [ 
+        prompt,
+        // entry
+        // , 
+        listview
+         ];
+}
+
+#listview {
+    enabled:                     true;
+
+    layout:     vertical;
+    lines:      5;
+    cycle:      true;
+    dynamic:    true;
+    scrollbar:  false;
+    background-color: transparent;
+}
+
+#entry {
+    expand:     false;
+    width:      10em;
+}
+
+#element {
+    padding: 0px 2px;
+    color: var(foreground);
+}
+#element selected {
+    color: var(foreground);
+
+}
+
+element normal.normal {
+    background-color:            @background;
+    text-color:                  @foreground;
+}
+element normal.urgent {
+    background-color:            @urgent;
+    text-color:                  @foreground;
+}
+element normal.active {
+    background-color:            @active;
+    text-color:                  @foreground;
+}
+
+element alternate.normal {
+    background-color:            @background;
+    text-color:                  @foreground;
+}
+element alternate.urgent {
+    background-color:            @urgent;
+    text-color:                  @foreground;
+}
+element alternate.active {
+    background-color:            @active;
+    text-color:                  @foreground;
+}
+element selected.normal {
+    background-color:            @foreground;
+    text-color:                  @background-alt;
+}
+element selected.urgent {
+    background-color:            @urgent;
+    text-color:                  @foreground-alt;
+}
+element selected.active {
+    background-color:            @urgent;
+    text-color:                  @foreground-alt;
+}
+
+prompt{
+    font: "Fira Code, Medium 22";
+}
