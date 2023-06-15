@@ -125,7 +125,7 @@ globalkeys = mytable.join(
         { description = "take a screenshot", group = "hotkeys" }),
 
     -- X screen locker
-    awful.key({ altkey, "Control" }, "l", function() awful.spawn("betterlockscreen_rapid 20 1") end,
+    awful.key({ modkey }, "l", function() awful.spawn("betterlockscreen_rapid 20 1") end,
         { description = "lock screen", group = "hotkeys" }),
 
     -- Show help
