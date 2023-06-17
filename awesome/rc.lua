@@ -347,7 +347,7 @@ globalkeys = mytable.join(
         { description = "run discord", group = "launcher" }),
     awful.key({ modkey }, "s", function() awful.spawn.easy_async("spotify", function() end) end,
         { description = "run spotify", group = "launcher" }),
-    awful.key({ modkey }, "r",
+    awful.key({modkey }, "r",
         function() awful.spawn("sh /home/vix/.config/rofi/launchers/launcher.sh") end,
         { description = "run rofi desktop applications", group = "launcher" }),
     awful.key({ modkey, "Shift" }, "s",
@@ -528,4 +528,7 @@ client.connect_signal("unmanage", backham)
 tag.connect_signal("property::selected", backham)
 
 local brightness = require("components").brightness
+
+awful.spawn.with_shell("pamixer --toggle-mute")
+awful.spawn.with_shell("pacwall -ug")
 -- }}}

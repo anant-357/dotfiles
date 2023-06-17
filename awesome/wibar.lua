@@ -171,6 +171,5 @@ end
 -- awful.spawn.with_shell(
 --     "xautolock -time 10 -notify 5 -notifier '/usr/lib/xsecurelock/until_nonidle /usr/lib/xsecurelock/dimmer' -locker xsecurelock")
 -- awful.spawn.with_shell("pamixer --toggle-mute")
-awful.spawn.with_shell("pamixer --toggle-mute")
 
 return out
