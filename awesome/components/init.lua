@@ -12,5 +12,6 @@ return {
     ethernet     = require("components.ethernet"),
     microphone   = require("components.microphone"),
     screenshot   = require("components.screenshot"),
-    rgb_keyboard = require("components.rgb_keyboard")
+    rgb_keyboard = require("components.rgb_keyboard"),
+    volume_bar   = require("components.volume_bar")
 }
