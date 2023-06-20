@@ -15,15 +15,15 @@ local function factory(args)
     local settings = args.settings or function() end
 
     pulse.devicetype = args.devicetype or "sink"
-    pulse.cmd = args.cmd or "pacmd list-" .. pulse.devicetype .. "s | sed -n -e '/*/,$!d' -e '/index/p' -e '/base volume/d' -e '/volume:/p' -e '/muted:/p' -e '/device\\.string/p'"
+    pulse.cmd = args.cmd or "pactl list " .. pulse.devicetype .. "s | sed -n -e '/Driver:/p' -e '/Base Volume:/d' -e '/Volume:/p' -e '/Mute:/p' -e '/device\\.string/p'"
 
     function pulse.update()
         helpers.async({ shell, "-c", type(pulse.cmd) == "string" and pulse.cmd or pulse.cmd() },
         function(s)
             volume_now = {
-                index  = string.match(s, "index: (%S+)") or "N/A",
-                device = string.match(s, "device.string = \"(%S+)\"") or "N/A",
-                muted  = string.match(s, "muted: (%S+)") or "N/A"
+                driver  = string.match(s, "Driver: (%S+)") or "N/A",
+                -- device = string.match(s, "device.string = \"(%S+)\"") or "N/A",
+                muted  = string.match(s, "Mute: (%S+)") or "N/A"
             }
 
             pulse.device = volume_now.index
