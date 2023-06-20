@@ -1,0 +1,25 @@
+local colors        = {}
+
+colors.dark_gray    = "#928374"
+colors.light_gray   = "#a89984"
+colors.dark_red     = "#cc241d"
+colors.light_red    = "#fb4934"
+colors.dark_green   = "#98971a"
+colors.light_green  = "#b8bb26"
+colors.dark_yellow  = "#d79921"
+colors.light_yellow = "#fabd2f"
+colors.dark_blue    = "#458588"
+colors.light_blue   = "#83a598"
+colors.dark_purple  = "#b16286"
+colors.light_purple = "#d3869b"
+colors.dark_aqua    = "#689d6a"
+colors.light_aqua   = "#8ec07c"
+colors.dark_orange  = "#d65d0e"
+colors.light_orange = "#fe8019"
+colors.black        = "#1d2021"
+
+colors.background   = "#fbf1c7"
+colors.background_1 = "#ebdbb2"
+colors.background_2 = "#d5c4a1"
+colors.foreground   = "#3c3836"
+return colors
