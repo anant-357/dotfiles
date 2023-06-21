@@ -18,7 +18,7 @@ local function leaveicon_function(args)
 
     leave_icon_containerized:buttons(awful.util.table.join(
         awful.button({}, 1, function()
-            awful.spawn("sh /home/vix/.config/rofi/powermenu/powermenu.sh")
+            awful.spawn.easy_async("sh /home/vix/.config/rofi/powermenu/powermenu.sh", function() end)
         end)
     ))
 

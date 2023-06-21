@@ -1,12 +1,9 @@
-local gears                 = require("gears")
 local awful                 = require("awful")
 local wibox                 = require("wibox")
 local components            = require("components")
 local functions             = require("functions")
 local colors                = require("colorschemes.gruvbox")
-local beautiful             = require("beautiful")
 local dpi                   = require("beautiful.xresources").apply_dpi
-local offsety               = dpi(100)
 local screen                = awful.screen.focused()
 
 local spr                   = wibox.widget.textbox(' ')
@@ -14,29 +11,30 @@ spr.font                    = "Fira Code, Medium 7"
 
 local wibar_widget_enhancor = functions.wi_widget_enhancor
 
-
 -- Arch Icon  󰚌󰚀󰊠
-local arch_icon  = components.arch_ico({ icon = "󰊠", containers = "single" })
+local arch_icon             = components.arch_ico({ icon = "󰊠", containers = "single" })
 
 -- Clock
-local time       = components.time_ico({ container = "yes" })
+local time                  = components.time_ico({ container = "no" })
 
 -- Spotify
-local spotify    = components.spotify_all
+local spotify               = components.spotify_all
 
 -- ALSA volume
-local volume     = components.vol_ico({ container = "no" })
+local volume                = components.vol_ico({ container = "no" })
 
-local webcam     = components.webcam({ container = "no" })
+local webcam                = components.webcam({ container = "no" })
 
-local microphone = components.microphone({ container = "no" })
+local microphone            = components.microphone({ container = "no" })
 
 
 local multimedia_all               = wibox.widget {
     spr,
     webcam,
     spr,
+    spr,
     volume,
+    spr,
     spr,
     microphone,
     spr,
@@ -58,7 +56,9 @@ local future_all                   = wibox.widget {
     spr,
     ethernet,
     spr,
+    spr,
     wifi,
+    spr,
     spr,
     bluetooth,
     spr,
@@ -76,119 +76,123 @@ local rgb                          = components.rgb_keyboard({ container = "no" 
 
 local leave                        = components.leave_ico({ container = "yes" })
 
-local out                          = {}
+local s                            = awful.screen.focused()
 
-local wibar_shape                  = function(cr, width, height)
-    gears.shape.rounded_rect(cr, width, height, 12)
-end
+awful.tag(awful.util.tagnames, s, awful.layout.layouts[1])
 
-function out.at_screen_connect(s)
-    -- If wallpaper is a function, call it with the screen
-    local wallpaper = beautiful.wallpaper
-    if type(wallpaper) == "function" then
-        wallpaper = wallpaper(s)
-    end
-    gears.wallpaper.maximized(wallpaper, s, true)
+s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, awful.util.taglist_buttons)
 
-    awful.tag(awful.util.tagnames, s, awful.layout.layouts[1])
+s.padding = {
+    top = -60,
+    bottom = 64,
+    left = 10,
+    right = 10
+}
+s.mypromptbox = awful.widget.prompt()
 
-    s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, awful.util.taglist_buttons)
+s.mylayoutbox = awful.widget.layoutbox(s)
 
-    s.padding = {
-        top = 5
-    }
-    s.mypromptbox = awful.widget.prompt()
+s.statusbar = awful.wibox({
+    screen = s,
+    bg = colors.background,
+    fg = colors.foreground,
+    type = "notification",
+    width = dpi(1900),
+    height = dpi(60),
+    visible = true,
 
-    s.mylayoutbox = awful.widget.layoutbox(s)
+})
 
-    s.statusbar = awful.wibox({
-        -- position = "top",
-        screen = s,
-        bg = colors.background,
-        fg = colors.foreground,
-        -- border_width = 4,
-        -- border_color = "#fbf1c7",
-        -- shape_bounding = wibar_shape,
-        -- shape_clip = functions.wi_widget_shape,
-        -- shape = wibar_shape,
-        type = "notification",
-        y = -10,
-        width = dpi(1910),
-        height = dpi(45),
-        visible = true,
+s.displaybar = awful.wibox({
+    screen = s,
+    bg = colors.background,
+    fg = colors.foreground,
+    type = "notification",
+    width = dpi(1900),
+    height = dpi(35),
+    visible = true,
 
-    })
+})
 
-    local battile_all = wibox.widget {
-        spr,
-        screenshot,
-        spr,
-        spr,
-        rgb,
-        spr,
-        battery,
-        spr,
-        s.mylayoutbox,
-        spr,
-        layout = wibox.layout.fixed.horizontal
-    }
+local battile_all = wibox.widget {
+    spr,
+    screenshot,
+    spr,
+    spr,
+    spr,
+    rgb,
+    spr,
+    spr,
+    battery,
+    spr,
+    spr,
+    s.mylayoutbox,
+    spr,
+    layout = wibox.layout.fixed.horizontal
+}
 
-    local prompt_box_icon = wibox.widget.textbox("󰗣")
-    prompt_box_icon.font = "Symbols Nerd Font Mono 11"
+local prompt_box_icon = wibox.widget.textbox("󰗣")
+prompt_box_icon.font = "Symbols Nerd Font Mono 11"
 
-    local prompt_box = wibox.widget {
-        prompt_box_icon,
-        spr,
-        s.mypromptbox,
-        layout = wibox.layout.fixed.horizontal
+local prompt_box = wibox.widget {
+    prompt_box_icon,
+    spr,
+    s.mypromptbox,
+    layout = wibox.layout.fixed.horizontal
 
-    }
+}
 
-    local battile_all_containerized = wibar_widget_enhancor(battile_all, colors.dark_orange)
+local battile_all_containerized = wibar_widget_enhancor(battile_all, colors.dark_orange)
 
-    s.statusbar:setup {
-        layout = wibox.layout.stack,
+s.statusbar:setup {
+    layout = wibox.layout.stack,
+    {
+        layout = wibox.layout.align.horizontal,
         {
-            layout = wibox.layout.align.horizontal,
-            {
-                layout = wibox.layout.fixed.horizontal,
-                spr,
-                arch_icon,
-                spr,
-                wibar_widget_enhancor(s.mytaglist, colors.background_2),
-                spr,
-                wibar_widget_enhancor(prompt_box, colors.background),
-                spr,
-            },
-            {
-                time,
-                valign = "center",
-                halign = "center",
-                layout = wibox.container.place
-            },
-            {
-                layout = wibox.layout.fixed.horizontal,
-                spr,
-                spotify,
-                spr,
-                multimedia_all_containerized,
-                spr,
-                future_all_containerized,
-                spr,
-                battile_all_containerized,
-                spr,
-                leave,
-                spr
-            }
+            layout = wibox.layout.fixed.horizontal,
+            spr,
+            leave,
+            -- spr,
+            arch_icon,
+        },
+        nil,
+        {
+            layout = wibox.layout.fixed.horizontal,
+            spr,
+            spotify,
+            -- spr,
+            multimedia_all_containerized,
+            -- spr,
+            future_all_containerized,
+            -- spr,
+            battile_all_containerized,
+            spr,
 
         }
+
     }
-    s.statusbar.y = 5
-end
+}
 
--- awful.spawn.with_shell("picom --config ~/.config/awesome/picom-jonaburg.conf -b")
--- awful.spawn.with_shell(
---     "xautolock -time 10 -notify 5 -notifier '/usr/lib/xsecurelock/until_nonidle /usr/lib/xsecurelock/dimmer' -locker xsecurelock")
--- awful.spawn.with_shell("pamixer --toggle-mute")
+s.displaybar:setup {
+    layout = wibox.layout.stack,
+    {
+        layout = wibox.layout.fixed.horizontal,
+        -- wibar_widget_enhancor(
+        s.mytaglist,
+        -- colors.background_2),
+        spr,
+        -- wibar_widget_enhancor(
+        prompt_box,
+        --  colors.background),
+    },
 
-return out
+    {
+        time,
+        valign = "center",
+        halign = "center",
+        layout = wibox.container.place
+    }
+
+}
+s.statusbar.y = screen.geometry.height - 70
+s.displaybar.y = 10

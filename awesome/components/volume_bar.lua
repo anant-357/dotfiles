@@ -104,12 +104,13 @@ local function factory(args)
         -- create the volume_bar_adjust component
         volume_bar_adjust = wibox({
             screen = awful.screen.focused(),
-            x = (screen.geometry.width / 2) - (offsetx / 2),
-            y = screen.geometry.height - offsety,
+            x = (screen.geometry.width / 2) - (offsetx / 2) - 260,
+            y = screen.geometry.height - offsety + 35,
             height = dpi(48),
             width = offsetx,
             visible = false,
-            ontop = true
+            ontop = true,
+            type = "desktop"
         })
 
         volume_bar_bar = wibox.widget {

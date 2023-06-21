@@ -15,14 +15,15 @@ brightness_icon.font = "Symbols Nerd Font Mono 18"
 -- create the brightness_adjust component
 local brightness_adjust = wibox({
     screen = awful.screen.focused(),
-    x = (screen.geometry.width / 2) - (offsetx / 2),
-    y = screen.geometry.height - offsety,
+    x = (screen.geometry.width / 2) - (offsetx / 2) + 200,
+    y = screen.geometry.height - offsety + 35,
     height = dpi(48),
     width = offsetx,
     -- shape = gears.shape.rounded_rect,
     visible = false,
     -- Cambiar brillo
-    ontop = true
+    ontop = true,
+    type = "desktop"
 })
 
 local brightness_bar = wibox.widget {
