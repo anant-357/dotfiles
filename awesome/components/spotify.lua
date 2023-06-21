@@ -49,22 +49,29 @@ local spotify                   = backend.widget.spotify({
 spotify_icon:buttons(awful.util.table.join(
     awful.button({}, 1, function()
         if spot_t_now.status == "on" then
-            awful.util.spawn("playerctl play-pause")
+            awful.spawn.easy_async(
+                "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause",
+                function() end)
         else
-            awful.spawn.easy_async("spotify")
+            awful.spawn.easy_async("spotify", function() end
+            )
         end
     end)
 ))
 
 spotify_next_song_icon:buttons(awful.util.table.join(
     awful.button({}, 1, function()
-        awful.util.spawn("playerctl next")
+        awful.spawn.easy_async(
+            "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next",
+            function() end)
     end)
 ))
 
 spotify_prev_song_icon:buttons(awful.util.table.join(
     awful.button({}, 1, function()
-        awful.util.spawn("playerctl previous")
+        awful.spawn.easy_async(
+            "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous",
+            function() end)
     end)
 ))
 
