@@ -62,7 +62,7 @@ local editor         = os.getenv("EDITOR") or "nvim"
 local browser        = "firefox"
 
 awful.util.terminal  = terminal
-awful.util.tagnames  = { "1", "2", "terminak", "one piece", "spotify" }
+awful.util.tagnames  = { " 1 ", " 2 ", " 3 ", " 4 ", " 5 " }
 awful.layout.layouts = {
     awful.layout.suit.tile,          -- 󰢡
     awful.layout.suit.spiral.name,   -- 󰥋
@@ -98,10 +98,15 @@ screen.connect_signal("property::geometry", function(s)
     end
 end)
 
-local wibar = require("wibar")
+require("wibar")
+
+
 
 -- Create a wibox for each screen and add it
-awful.screen.connect_for_each_screen(function(s) wibar.at_screen_connect(s) end)
+awful.screen.connect_for_each_screen(function(s) -- If wallpaper is a function, call it with the screen
+    awful.spawn.easy_async_with_shell("pacwall -ug", function() end)
+end)
+
 
 -- }}}
 
@@ -125,6 +130,12 @@ globalkeys = mytable.join(
     -- X screen locker
     awful.key({ modkey }, "l", function() awful.spawn("betterlockscreen_rapid 20 1") end,
         { description = "lock screen", group = "hotkeys" }),
+
+    awful.key({ modkey, "Shift" }, "l", function()
+            awful.spawn.easy_async("sh /home/vix/.config/rofi/powermenu/powermenu.sh", function() end)
+        end,
+        { description = "exit menu", group = "hotkeys" }),
+
 
     -- Show help
     awful.key({ modkey, }, "s", hotkeys_popup.show_help,
@@ -249,7 +260,11 @@ globalkeys = mytable.join(
         { description = "delete tag", group = "tag" }),
 
     -- Standard program
-    awful.key({ modkey, }, "Return", function() awful.spawn.easy_async(terminal) end,
+    awful.key({ modkey, }, "Return", function()
+            awful.spawn.easy_async(terminal, function()
+
+            end)
+        end,
         { description = "open a terminal", group = "launcher" }),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
         { description = "reload awesome", group = "awesome" }),
@@ -337,13 +352,25 @@ globalkeys = mytable.join(
     awful.key({ modkey }, "s", function() awful.spawn.easy_async("spotify", function() end) end,
         { description = "run spotify", group = "launcher" }),
     awful.key({ modkey }, "r",
-        function() awful.spawn.easy_async("sh /home/vix/.config/rofi/launchers/launcher.sh") end,
+        function()
+            awful.spawn.easy_async("sh /home/vix/.config/rofi/launchers/launcher.sh", function()
+
+            end)
+        end,
         { description = "run rofi desktop applications", group = "launcher" }),
     awful.key({ modkey, "Shift" }, "s",
-        function() awful.spawn.easy_async_with_shell("sh /home/vix/dotfiles/awesome/screenshot_selection.sh") end,
+        function()
+            awful.spawn.easy_async_with_shell("sh /home/vix/dotfiles/awesome/screenshot_selection.sh", function()
+
+            end)
+        end,
         { description = "capture selection screenshot", group = "launcher" }),
     awful.key({ modkey, "Shift" }, "#107",
-        function() awful.spawn.easy_async_with_shell("sh /home/vix/dotfiles/awesome/screenshot_screen.sh") end,
+        function()
+            awful.spawn.easy_async_with_shell("sh /home/vix/dotfiles/awesome/screenshot_screen.sh", function()
+
+            end)
+        end,
         { description = "capture selection screenshot", group = "launcher" })
 
 )
@@ -517,9 +544,11 @@ client.connect_signal("unmanage", backham)
 -- ensure there is always a selected client during tag switching or logins
 tag.connect_signal("property::selected", backham)
 
-local brightness = require("components").brightness
-local volume_bar = require("components").volume_bar({ shape = "default", colorscheme = "default" })
-awful.spawn.easy_async_with_shell("picom --config ~/dotfiles/picom/picom.conf ")
-awful.spawn.easy_async_with_shell("pamixer --unmute ")
-awful.spawn.easy_async_with_shell("pacwall -ug")
--- }}}
+local x = require("components").brightness
+require("components").volume_bar({ shape = "default", colorscheme = "default" })
+awful.spawn.easy_async_with_shell("picom --config ~/dotfiles/picom/picom.conf ", function()
+
+end)
+awful.spawn.easy_async_with_shell("pamixer --unmute ", function()
+
+end)

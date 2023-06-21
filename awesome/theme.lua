@@ -13,11 +13,11 @@ theme.fg_urgent     = "#fb4934"
 theme.bg_normal     = "#282828"
 theme.bg_focus      = "#1d2021"
 theme.bg_urgent     = "#1A1A1A"
--- theme.border_width  = dpi(3)
--- theme.border_normal = theme.colors.dark_gray
--- theme.border_focus  = theme.colors.light_gray
+theme.border_width  = dpi(3)
+theme.border_normal = theme.colors.dark_gray
+theme.border_focus  = theme.colors.light_gray
 -- theme.border_marked = "#CC9393"
-theme.useless_gap   = dpi(7)
+theme.useless_gap   = dpi(15)
 theme.layout_tile   = "󰢡"
 
 -- Colors

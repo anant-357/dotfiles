@@ -53,9 +53,9 @@ run_cmd() {
 	selected="$(confirm_exit)"
 	if [[ "$selected" == "$yes" ]]; then
 		if [[ $1 == '--shutdown' ]]; then
-			shutdown -a now
+			sudo /usr/bin/shutdown -a now
 		elif [[ $1 == '--reboot' ]]; then
-			shutdown -r now
+			sudo /usr/bin/shutdown -r now
 		elif [[ $1 == '--hibernate' ]]; then
 			sudo systemctl hibernate
 		elif [[ $1 == '--suspend' ]]; then
