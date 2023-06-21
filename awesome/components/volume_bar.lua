@@ -157,7 +157,7 @@ local function factory(args)
         end
     }
 
-    awesome.connect_signal("volume_bar_change",
+    awesome.connect_signal("volume_change",
         function()
             awful.spawn.easy_async_with_shell('pamixer --get-volume',
                 function(stdout)
