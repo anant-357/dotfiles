@@ -121,8 +121,6 @@ globalkeys = mytable.join(
 -- Destroy all notifications
     awful.key({ "Control", }, "space", function() naughty.destroy_all_notifications() end,
         { description = "destroy all notifications", group = "hotkeys" }),
-    awful.key({ altkey }, "p", function() os.execute("screenshot") end,
-        { description = "take a screenshot", group = "hotkeys" }),
 
     -- X screen locker
     awful.key({ modkey }, "l", function() awful.spawn("betterlockscreen_rapid 20 1") end,
@@ -251,7 +249,7 @@ globalkeys = mytable.join(
         { description = "delete tag", group = "tag" }),
 
     -- Standard program
-    awful.key({ modkey, }, "Return", function() awful.spawn(terminal) end,
+    awful.key({ modkey, }, "Return", function() awful.spawn.easy_async(terminal) end,
         { description = "open a terminal", group = "launcher" }),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
         { description = "reload awesome", group = "awesome" }),
@@ -300,39 +298,30 @@ globalkeys = mytable.join(
     awful.key({}, "XF86AudioRaiseVolume",
         function()
             os.execute("pamixer --allow-boost --increase 7")
-            awesome.emit_signal("volume_bar_change")
+            awesome.emit_signal("volume_change")
         end,
         { description = "Increase Volume by 7", group = "hotkeys" }),
 
     awful.key({}, "XF86AudioLowerVolume",
         function()
             os.execute("pamixer --allow-boost --decrease 7")
-            awesome.emit_signal("volume_bar_change")
+            awesome.emit_signal("volume_change")
         end,
         { description = "Decrease Volume by 7", group = "hotkeys" }),
 
     awful.key({}, "XF86AudioMute",
         function()
             os.execute("pamixer --toggle-mute")
-            awesome.emit_signal("volume_bar_change")
+            awesome.emit_signal("volume_change")
         end,
         { description = "Mute/Unmute the Speaker", group = "hotkeys" }),
 
     awful.key({}, "#198",
         function()
             os.execute("amixer set Capture toggle")
-            awesome.emit_signal("volume_bar_change")
+            awesome.emit_signal("volume_change")
         end,
         { description = "Mute/Unmute Microphone", group = "hotkeys" }),
-
-
-
-    -- Copy primary to clipboard (terminals to gtk)
-    awful.key({ modkey }, "c", function() awful.spawn.with_shell("xsel | xsel -i -b") end,
-        { description = "copy terminal to gtk", group = "hotkeys" }),
-    -- Copy clipboard to primary (gtk to terminals)
-    awful.key({ modkey }, "v", function() awful.spawn.with_shell("xsel -b | xsel") end,
-        { description = "copy gtk to terminal", group = "hotkeys" }),
 
     -- User programs
     awful.key({ modkey }, "q", function()
@@ -347,14 +336,15 @@ globalkeys = mytable.join(
         { description = "run discord", group = "launcher" }),
     awful.key({ modkey }, "s", function() awful.spawn.easy_async("spotify", function() end) end,
         { description = "run spotify", group = "launcher" }),
-    awful.key({modkey }, "r",
-        function() awful.spawn("sh /home/vix/.config/rofi/launchers/launcher.sh") end,
+    awful.key({ modkey }, "r",
+        function() awful.spawn.easy_async("sh /home/vix/.config/rofi/launchers/launcher.sh") end,
         { description = "run rofi desktop applications", group = "launcher" }),
     awful.key({ modkey, "Shift" }, "s",
-        function() awful.spawn.with_shell("sh /home/vix/dotfiles/awesome/screenshot.sh") end,
+        function() awful.spawn.easy_async_with_shell("sh /home/vix/dotfiles/awesome/screenshot_selection.sh") end,
+        { description = "capture selection screenshot", group = "launcher" }),
+    awful.key({ modkey, "Shift" }, "#107",
+        function() awful.spawn.easy_async_with_shell("sh /home/vix/dotfiles/awesome/screenshot_screen.sh") end,
         { description = "capture selection screenshot", group = "launcher" })
-
-
 
 )
 
@@ -528,7 +518,8 @@ client.connect_signal("unmanage", backham)
 tag.connect_signal("property::selected", backham)
 
 local brightness = require("components").brightness
-
-awful.spawn.with_shell("pamixer --toggle-mute")
-awful.spawn.with_shell("pacwall -ug")
+local volume_bar = require("components").volume_bar({ shape = "default", colorscheme = "default" })
+awful.spawn.easy_async_with_shell("picom --config ~/dotfiles/picom/picom.conf ")
+awful.spawn.easy_async_with_shell("pamixer --unmute ")
+awful.spawn.easy_async_with_shell("pacwall -ug")
 -- }}}

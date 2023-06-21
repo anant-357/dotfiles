@@ -48,8 +48,8 @@ local function neticon_function(args)
         timer_function = function()
             return backend.util.markup.font("FiraCode Nerd Font Mono, Medium 10",
                 string.format("%s\nDownload: %02.1f Mbps\nUpload: %02.1f Mbps", net_status.info,
-                    net_status.recieved / 1024,
-                    net_status.sent / 1024
+                    net_status.recieved,
+                    net_status.sent
                 ))
         end
     }
