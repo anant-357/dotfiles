@@ -1,3 +1,4 @@
+local gears                 = require("gears")
 local awful                 = require("awful")
 local wibox                 = require("wibox")
 local components            = require("components")
@@ -78,9 +79,60 @@ local leave                        = components.leave_ico({ container = "yes" })
 
 local s                            = awful.screen.focused()
 
+
+local tasklist_buttons = gears.table.join(
+    awful.button({}, 1, function(c)
+        if c == client.focus then
+            c.minimized = true
+        else
+            c:emit_signal(
+                "request::activate",
+                "tasklist",
+                { raise = true }
+            )
+        end
+    end),
+    awful.button({}, 3, function()
+        awful.menu.client_list({ theme = { width = 250 } })
+    end),
+    awful.button({}, 4, function()
+        awful.client.focus.byidx(1)
+    end),
+    awful.button({}, 5, function()
+        awful.client.focus.byidx(-1)
+    end))
+
+
+
+
 awful.tag(awful.util.tagnames, s, awful.layout.layouts[1])
 
+
+
+
 s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, awful.util.taglist_buttons)
+
+s.mytasklist = awful.widget.tasklist {
+    screen = s,
+    filter = awful.widget.tasklist.filter.currenttags,
+    buttons = tasklist_buttons,
+    layout = {
+        spacing        = 10,
+        spacing_widget = {
+            {
+                forced_width = 5,
+                widget       = wibox.widget.separator
+            },
+            valign = 'center',
+            halign = 'center',
+            widget = wibox.container.place,
+        },
+        layout         = wibox.layout.flex.horizontal
+    },
+
+}
+
+
 
 s.padding = {
     top = -60,
@@ -94,10 +146,13 @@ s.mylayoutbox = awful.widget.layoutbox(s)
 
 s.statusbar = awful.wibox({
     screen = s,
-    bg = colors.background,
+    bg =
+    -- "#00000000"
+        colors.background
+    ,
     fg = colors.foreground,
     type = "notification",
-    width = dpi(1900),
+    width = dpi(1800),
     height = dpi(60),
     visible = true,
 
@@ -105,7 +160,10 @@ s.statusbar = awful.wibox({
 
 s.displaybar = awful.wibox({
     screen = s,
-    bg = colors.background,
+    bg =
+    -- "#00000000"
+        colors.background
+    ,
     fg = colors.foreground,
     type = "notification",
     width = dpi(1900),
@@ -174,7 +232,7 @@ s.statusbar:setup {
 }
 
 s.displaybar:setup {
-    layout = wibox.layout.stack,
+    layout = wibox.layout.flex.horizontal,
     {
         layout = wibox.layout.fixed.horizontal,
         -- wibar_widget_enhancor(
@@ -184,15 +242,23 @@ s.displaybar:setup {
         -- wibar_widget_enhancor(
         prompt_box,
         --  colors.background),
-    },
+    }, spr,
 
     {
         time,
-        valign = "center",
-        halign = "center",
-        layout = wibox.container.place
-    }
+        -- valign = "center",
+        -- halign = "center",
+        layout = wibox.layout.fixed.horizontal,
+
+        -- layout = wibox.container.place
+    }, spr,
+    {
+        layout = wibox.layout.fixed.horizontal,
+        s.mytasklist,
+        spr,
+        spr
+    },
 
 }
-s.statusbar.y = screen.geometry.height - 70
+s.statusbar.y = screen.geometry.height - 60
 s.displaybar.y = 10
