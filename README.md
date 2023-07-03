@@ -14,6 +14,6 @@ Terminal            : Kitty
 
 ### Everforest
 ![desktop](https://github.com/anant-357/dotfiles/blob/main/screenshots/Everforest_Desktop.png?raw=true)
-![code](https://github.com/anant-357/dotfiles/blob/main/screenshots/Everforest_Code?raw=true)
+![code](https://github.com/anant-357/dotfiles/blob/main/screenshots/Everforest_Code.png?raw=true)
 
 
