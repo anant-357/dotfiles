@@ -8,6 +8,14 @@ lastlogin="`last $USER | head -n1 | tr -s ' ' | cut -d' ' -f5,6,7`"
 uptime="`uptime -p | sed -e 's/up //g'`"
 host=`hostname`
 
+# Colors
+color_lock='#ff0000'
+color_suspend='#00ff00'
+color_logout='#0000ff'
+color_hibernate='#ffff00'
+color_reboot='#ff00ff'
+color_shutdown='#00ffff'
+
 # Options
 hibernate=''
 shutdown=''
@@ -23,7 +31,7 @@ rofi_cmd() {
 	rofi -dmenu \
 		-p " $USER@$host" \
 		-mesg " Uptime: $uptime" \
-		-theme ${dir}/${theme}.rasi
+		-theme ${dir}/${theme}.rasi 
 }
 
 # Confirmation CMD
