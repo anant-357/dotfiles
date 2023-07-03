@@ -4,66 +4,60 @@ local functions             = require("functions")
 local wibar_widget_enhancor = functions.wi_widget_enhancor
 local wibar_widget_shape    = functions.wi_widget_shape
 local backend               = require("backend")
-local colors                = require("colorschemes.gruvbox")
+local beautiful             = require("beautiful")
 
 
 local function baticon_function(args)
-    local container_bool        = args.container or "no"
-    local baticon               = wibox.widget.textbox('󰁿')
+    local container_bool = args.container or "no"
+    local font_size      = args.font_size or 12
 
-    local baticon_containerized = wibar_widget_enhancor(baticon, colors.dark_gray)
+    local battext        = wibox.widget.textbox('󰁿')
+    local baticon        =
+        wibox.widget {
+            widget           = wibox.widget.progressbar,
+            forced_height    = 10,
+            forced_width     = 18,
+            color            = beautiful.foreground,
+            background_color = beautiful.battery_bg,
+            max_value        = 100,
+            value            = 0
+        }
 
-    baticon.font                = "Symbols Nerd Font Mono 12"
+    local spr            = wibox.widget.textbox(backend.util.markup.font("FiraCode Nerd Font Mono, Medium 3", " "))
 
 
-    local bat_status = {}
+    local bat_status            = {}
 
-    local bat        = backend.widget.bat({
+    local bat                   = backend.widget.bat({
         timeout = 2,
         notify = "off",
         settings = function()
             if bat_now.status and bat_now.status ~= "N/A" then
+                baticon:set_value(bat_now.perc)
+
+
                 if bat_now.ac_status == 1 then
                     if tonumber(bat_now.perc) == 100 then
-                        baticon:set_text('') --
-                        baticon:set_font('Symbols Nerd Font Mono,Bold 12')
+                        battext:set_text('󱐱')
+                        battext:set_font('Symbols Nerd Font Mono,10')
                     else
-                        baticon:set_text('')
+                        battext:set_text(' ')
+                        battext:set_font('Symbols Nerd Font Mono ' .. tostring(font_size))
                     end
                 else
-                    if tonumber(bat_now.perc) > 0 and tonumber(bat_now.perc) <= 5 then
-                        baticon:set_text('!')
-                    elseif tonumber(bat_now.perc) > 5 and tonumber(bat_now.perc) <= 20 then
-                        baticon:set_text('󰁻')
-                    elseif tonumber(bat_now.perc) > 20 and tonumber(bat_now.perc) <= 30 then
-                        baticon:set_text('󰁼')
-                    elseif tonumber(bat_now.perc) > 30 and tonumber(bat_now.perc) <= 38 then
-                        baticon:set_text('󰁽')
-                    elseif tonumber(bat_now.perc) > 38 and tonumber(bat_now.perc) <= 50 then
-                        baticon:set_text('󰁾')
-                    elseif tonumber(bat_now.perc) > 50 and tonumber(bat_now.perc) <= 60 then
-                        baticon:set_text('󰁿')
-                    elseif tonumber(bat_now.perc) > 60 and tonumber(bat_now.perc) <= 85 then
-                        baticon:set_text('󰂀')
-                    elseif tonumber(bat_now.perc) > 85 and tonumber(bat_now.perc) <= 90 then
-                        baticon:set_text('󰂁')
-                    elseif tonumber(bat_now.perc) > 90 and tonumber(bat_now.perc) <= 99 then
-                        baticon:set_text('󰂂')
-                    else
-                        baticon:set_text('')
-                    end
+                    battext:set_text('')
+                    battext:set_font('Symbols Nerd Font Mono 5')
                 end
             else
-                baticon:set_text('?')
+                battext:set_text(' ?')
             end
             bat_status = bat_now
         end
     })
+    local baticon_containerized = wibar_widget_enhancor(baticon, beautiful.battery_bg)
 
-    local battery_t  = awful.tooltip {
+    local battery_t             = awful.tooltip {
         objects = { baticon },
-        bg = colors.background,
-        fg = colors.foreground,
         shape = wibar_widget_shape,
         timer_function = function()
             local msg = ""
@@ -76,7 +70,27 @@ local function baticon_function(args)
     if container_bool == "yes" then
         return baticon_containerized
     else
-        return baticon
+        return
+
+            wibox.widget {
+                layout = wibox.layout.align.horizontal,
+
+
+                {
+                    id = "alignly",
+                    widget = wibox.container.place,
+                    halign = "center",
+                    {
+                        widget = wibox.container.rotate,
+                        baticon,
+                        direction = "east"
+                    }
+                }, spr, {
+                widget = wibox.container.place,
+                halign = "center",
+                battext
+            }
+            }
     end
 end
 

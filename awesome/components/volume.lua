@@ -4,7 +4,7 @@ local functions             = require("functions")
 local wibar_widget_enhancor = functions.wi_widget_enhancor
 local wibar_widget_shape    = functions.wi_widget_shape
 local backend               = require("backend")
-local colors                = require("colorschemes.gruvbox")
+local beautiful             = require("beautiful")
 
 local cmd                   =
 "pactl list sinks | sed -n -e '/Driver:/p' -e '/Base Volume:/d' -e '/Volume:/p' -e '/Mute:/p' -e '/device\\.string/p'"
@@ -14,7 +14,7 @@ local function volicon_function(args)
     local container_bool        = args.container or "no"
 
     local volicon               = wibox.widget.textbox(' 󰖁 ')
-    local volicon_containerized = wibar_widget_enhancor(volicon, colors.dark_gray)
+    local volicon_containerized = wibar_widget_enhancor(volicon, beautiful.volume_bg)
     volicon.font                = "Symbols Nerd Font Mono 11"
     local volume_status         = {}
 
@@ -58,8 +58,6 @@ local function volicon_function(args)
 
     local volume_t = awful.tooltip {
         objects = { volicon },
-        bg = colors.background,
-        fg = colors.foreground,
         shape = wibar_widget_shape,
         timer_function = function()
             return backend.util.markup.font("FiraCode Nerd Font Mono, Medium 10",

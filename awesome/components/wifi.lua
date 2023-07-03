@@ -4,53 +4,66 @@ local functions             = require("functions")
 local wibar_widget_enhancor = functions.wi_widget_enhancor
 local wibar_widget_shape    = functions.wi_widget_shape
 local backend               = require("backend")
-local colors                = require("colorschemes.gruvbox")
+local beautiful             = require("beautiful")
 
 local function neticon_function(args)
     local container_bool        = args.container or "no"
 
-    local neticon               = wibox.widget.textbox(' 󰤮')
-    local neticon_containerized = wibar_widget_enhancor(neticon, colors.dark_gray)
+    local neticon               = wibox.widget.textbox(' ')
+    local neticon_containerized = wibar_widget_enhancor(neticon, beautiful.wifi_bg)
     neticon.font                = "Symbols Nerd Font Mono 12"
 
     local net_status            = {}
+    local net_speed             = {}
 
     local net                   = backend.widget.wifi({
-        timeout = 2,
+        timeout = 0.5,
         settings = function()
             -- 󰤮󰤬󰤫 󰤡󰤠 󰤤󰤣 󰤧󰤦 󰤭󰤪󰤩
-
-            local signal = wifi_now.signal
-            if signal < -83 then
-                neticon:set_text(" 󰤯")
-            elseif signal < -70 then
-                neticon:set_text(" 󰤟")
-            elseif signal < -53 then
-                neticon:set_text(" 󰤢")
-            elseif signal < -40 then
-                neticon:set_text(" 󰤥")
-            elseif signal >= -40 then
-                neticon:set_text(" 󰤨")
+            if wifi_now.state == "down" then
+                neticon:set_text(" 󰤮")
+            else
+                local signal = tonumber(wifi_now.signal) or -1000
+                -- neticon:set_text(tostring(wifi_now.sent))
+                if signal < -83 then
+                    neticon:set_text(" 󰤯")
+                elseif signal < -70 then
+                    neticon:set_text(" 󰤟")
+                elseif signal < -53 then
+                    neticon:set_text(" 󰤢")
+                elseif signal < -40 then
+                    neticon:set_text(" 󰤥")
+                elseif signal >= -40 then
+                    neticon:set_text(" 󰤨")
+                end
             end
-            awful.spawn.easy_async_with_shell('nmcli device wifi show-password', function(out)
-                net_status.info = out
-            end)
-            net_status.sent = wifi_now.sent
-            net_status.recieved = wifi_now.received
+
+            net_status = wifi_now
+            awful.spawn.easy_async_with_shell('nmcli -t -f active,ssid dev wifi | grep "^yes" | cut -d: -f2',
+                function(out)
+                    net_status.info = out
+                end)
         end
     })
 
     local net_t                 = awful.tooltip {
         objects = { neticon },
-        bg = colors.background,
-        fg = colors.foreground,
         shape = wibar_widget_shape,
         timer_function = function()
-            return backend.util.markup.font("FiraCode Nerd Font Mono, Medium 10",
-                string.format("%s\nDownload: %02.1f Mbps\nUpload: %02.1f Mbps", net_status.info,
-                    net_status.recieved,
-                    net_status.sent
-                ))
+            -- local ret
+            if net_status.state == "down" then
+                return backend.util.markup.font("FiraCode Nerd Font Mono, Medium 10",
+                    "Wifi Off")
+            else
+                return backend.util.markup.font("FiraCode Nerd Font Mono, Medium 10",
+                    string.format("%sDownload: %02.1f Mbps\nUpload: %02.1f Mbps",
+                        net_status.info,
+                        net_status.received,
+                        net_status.sent
+                    ))
+            end
+
+            -- return ret
         end
     }
 

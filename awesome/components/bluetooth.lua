@@ -4,17 +4,18 @@ local functions             = require("functions")
 local wibar_widget_enhancor = functions.wi_widget_enhancor
 local wibar_widget_shape    = functions.wi_widget_shape
 local backend               = require("backend")
-local colors                = require("colorschemes.gruvbox")
+local beautiful             = require("beautiful")
 
 
 local function bluetooth_icon_function(args)
     local container_bool               = args.container or "no"
     local bluetooth_icon               = wibox.widget.textbox('󰂱')
-    bluetooth_icon.font                = "Symbols Nerd Font Mono 12"
+    local font_size                    = args.font_size or 12
+    bluetooth_icon.font                = "Symbols Nerd Font Mono " .. tostring(font_size)
 
     local bluetooth_status             = {}
 
-    local bluetooth_icon_containerized = wibar_widget_enhancor(bluetooth_icon, colors.dark_blue)
+    local bluetooth_icon_containerized = wibar_widget_enhancor(bluetooth_icon, beautiful.bluetooth_bg)
 
     local bluetooth                    = backend.widget.bluetooth({
         timeout = 1,
@@ -44,8 +45,6 @@ local function bluetooth_icon_function(args)
 
     local spotify_t = awful.tooltip {
         objects = { bluetooth_icon },
-        bg = colors.background,
-        fg = colors.foreground,
         shape = wibar_widget_shape,
         timer_function = function()
             if bluetooth_status.status == "off" then

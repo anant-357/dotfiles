@@ -1,4 +1,5 @@
 return {
+    add_tag      = require("components.add_tag"),
     arch_ico     = require("components.arch_icon"),
     time_ico     = require("components.time"),
     wifi_ico     = require("components.wifi"),
@@ -11,7 +12,8 @@ return {
     webcam       = require("components.webcam"),
     ethernet     = require("components.ethernet"),
     microphone   = require("components.microphone"),
-    screenshot   = require("components.screenshot"),
     rgb_keyboard = require("components.rgb_keyboard"),
-    volume_bar   = require("components.volume_bar")
+    volume_bar   = require("components.volume_bar"),
+    user         = require("components.user")
+
 }

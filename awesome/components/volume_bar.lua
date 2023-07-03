@@ -1,13 +1,13 @@
-local awful   = require("awful")
-local wibox   = require("wibox")
-local colors  = require("colorschemes.gruvbox")
+local awful     = require("awful")
+local wibox     = require("wibox")
+local beautiful = require("beautiful")
 
-local gears   = require("gears")
-local dpi     = require("beautiful").xresources.apply_dpi
-local format  = string.format
-local offsetx = dpi(320)
-local offsety = dpi(100)
-local screen  = awful.screen.focused()
+local gears     = require("gears")
+local dpi       = require("beautiful").xresources.apply_dpi
+local format    = string.format
+local offsetx   = dpi(320)
+local offsety   = dpi(100)
+local screen    = awful.screen.focused()
 
 
 local function factory(args)
@@ -19,11 +19,11 @@ local function factory(args)
     local background
 
     if colorscheme == "inverted" then
-        foreground = colors.background
-        background = colors.foreground
+        foreground = beautiful.background
+        background = beautiful.foreground
     else
-        foreground = colors.foreground
-        background = colors.background
+        foreground = beautiful.foreground
+        background = beautiful.background
     end
 
     local volume_bar_icon
@@ -64,8 +64,8 @@ local function factory(args)
         volume_bar_bar    = wibox.widget {
             widget = wibox.widget.progressbar,
             height = dpi(42),
-            color = colors.foreground,
-            background_color = colors.dark_gray,
+            color = beautiful.foreground,
+            background_color = beautiful.volume_bar_bg,
             max_value = 200,
             value = 0,
             shape = volume_bar_adjust_shape
@@ -81,7 +81,7 @@ local function factory(args)
 
                 wibox.container.background(
                     volume_bar_bar,
-                    colors.background
+                    beautiful.volume_bar_bg
                 ),
                 forced_width = offsetx
 
@@ -115,8 +115,8 @@ local function factory(args)
 
         volume_bar_bar = wibox.widget {
             widget = wibox.widget.progressbar,
-            color = colors.foreground,
-            background_color = colors.dark_gray,
+            color = beautiful.foreground,
+            background_color = beautiful.volume_bar_bg,
             max_value = 200,
             value = 0
         }
@@ -129,7 +129,7 @@ local function factory(args)
 
                     wibox.container.margin(
                         volume_bar_bar, dpi(14), dpi(4), dpi(20), dpi(20)
-                    ), colors.background
+                    ), beautiful.background
                 ),
                 forced_width = 0.7 * offsetx
 
@@ -139,13 +139,13 @@ local function factory(args)
 
                 wibox.container.margin(
                     volume_bar_icon, dpi(0), dpi(0), dpi(0), dpi(0)
-                ), colors.background
+                ), beautiful.background
             ),
             wibox.container.background(
 
                 wibox.container.margin(
                     mute_icon, dpi(0), dpi(22), dpi(0), dpi(0)
-                ), colors.background
+                ), beautiful.background
             )
         }
     end

@@ -4,7 +4,7 @@ local functions             = require("functions")
 local wibar_widget_enhancor = functions.wi_widget_enhancor
 local wibar_widget_shape    = functions.wi_widget_shape
 local backend               = require("backend")
-local colors                = require("colorschemes.gruvbox")
+local beautiful             = require("beautiful")
 
 
 local function webcam_function(args)
@@ -12,7 +12,7 @@ local function webcam_function(args)
     local webcam_icon          = wibox.widget.textbox("")
     webcam_icon.font           = "Symbols Nerd Font Mono 10"
 
-    local webcam_containerized = wibar_widget_enhancor(webcam_icon, colors.dark_green)
+    local webcam_containerized = wibar_widget_enhancor(webcam_icon, beautiful.webcam_bg)
 
     local webcam_status        = {}
     --󰈈󰈉󰛐󰛑
@@ -42,8 +42,6 @@ local function webcam_function(args)
 
     local webcam_t = awful.tooltip {
         objects = { webcam_icon },
-        bg = colors.background,
-        fg = colors.foreground,
         shape = wibar_widget_shape,
         timer_function = function()
             if webcam_status.status == "off" then

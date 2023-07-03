@@ -4,14 +4,15 @@ local functions             = require("functions")
 local wibar_widget_enhancor = functions.wi_widget_enhancor
 local wibar_widget_shape    = functions.wi_widget_shape
 local backend               = require("backend")
-local colors                = require("colorschemes.gruvbox")
+local beautiful             = require("beautiful")
 
 local function neticon_function(args)
     local container_bool        = args.container or "no"
+    local font_size             = args.font_size or 10
 
     local neticon               = wibox.widget.textbox('󰈀')
-    local neticon_containerized = wibar_widget_enhancor(neticon, colors.dark_gray)
-    neticon.font                = "Symbols Nerd Font Mono 10"
+    local neticon_containerized = wibar_widget_enhancor(neticon, beautiful.ethernet_bg)
+    neticon.font                = "Symbols Nerd Font Mono " .. tostring(font_size)
 
     local net_status            = {}
 
@@ -35,8 +36,6 @@ local function neticon_function(args)
 
     local net_t                 = awful.tooltip {
         objects = { neticon },
-        bg = colors.background,
-        fg = colors.foreground,
         shape = wibar_widget_shape,
         timer_function = function()
             if net_status.carrier == "0" then

@@ -4,18 +4,18 @@ local functions             = require("functions")
 local wibar_widget_enhancor = functions.wi_widget_enhancor
 local wibar_widget_shape    = functions.wi_widget_shape
 local backend               = require("backend")
-local colors                = require("colorschemes.gruvbox")
+local beautiful             = require("beautiful")
 local spr                   = wibox.widget.textbox(' ')
 
 
 local spotify_icon           = wibox.widget.textbox("󰽳")
-spotify_icon.font            = "Symbols Nerd Font Mono 10"
+spotify_icon.font            = "Symbols Nerd Font Mono 11"
 
 local spotify_next_song_icon = wibox.widget.textbox("󰍟")
-spotify_next_song_icon.font  = "Symbols Nerd Font Mono 10"
+spotify_next_song_icon.font  = "Symbols Nerd Font Mono 11"
 
 local spotify_prev_song_icon = wibox.widget.textbox("󰍞")
-spotify_prev_song_icon.font  = "Symbols Nerd Font Mono 10"
+spotify_prev_song_icon.font  = "Symbols Nerd Font Mono 11"
 
 
 local spotify_all = wibox.widget {
@@ -28,7 +28,7 @@ local spotify_all = wibox.widget {
 }
 
 
-local spotify_all_containerized = wibar_widget_enhancor(spotify_all, colors.dark_green)
+local spotify_all_containerized = wibar_widget_enhancor(spotify_all, beautiful.spotify_bg)
 
 local spot_t_now                = {}
 
@@ -78,8 +78,6 @@ spotify_prev_song_icon:buttons(awful.util.table.join(
 
 local spotify_t           = awful.tooltip {
     objects = { spotify_icon },
-    bg = colors.background,
-    fg = colors.foreground,
     shape = wibar_widget_shape,
     timer_function = function()
         if spot_t_now.status == "off" then
@@ -94,8 +92,6 @@ local spotify_t           = awful.tooltip {
 
 local spotify_next_song_t = awful.tooltip {
     objects = { spotify_next_song_icon },
-    bg = colors.background,
-    fg = colors.foreground,
     shape = wibar_widget_shape,
     timer_function = function()
         if spot_t_now.status == "off" then
@@ -108,8 +104,6 @@ local spotify_next_song_t = awful.tooltip {
 
 local spotify_prev_song_t = awful.tooltip {
     objects = { spotify_prev_song_icon },
-    bg = colors.background,
-    fg = colors.foreground,
     shape = wibar_widget_shape,
     timer_function = function()
         if spot_t_now.status == "off" then

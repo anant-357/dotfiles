@@ -4,14 +4,15 @@ local functions             = require("functions")
 local wibar_widget_enhancor = functions.wi_widget_enhancor
 local wibar_widget_shape    = functions.wi_widget_shape
 local backend               = require("backend")
-local colors                = require("colorschemes.gruvbox")
+local beautiful                = require("beautiful")
 
 local function volicon_function(args)
     local container_bool        = args.container or "no"
+    local font_size             = args.font_size or 12
 
     local volicon               = wibox.widget.textbox('󰍭')
-    local volicon_containerized = wibar_widget_enhancor(volicon, colors.dark_gray)
-    volicon.font                = "Symbols Nerd Font Mono 12"
+    local volicon_containerized = wibar_widget_enhancor(volicon, beautiful.microphone_bg)
+    volicon.font                = "Symbols Nerd Font Mono " .. tostring(font_size)
     local volume_status         = {}
     local volume                = backend.widget.microphone({
         timeout = 0.1,
@@ -28,8 +29,6 @@ local function volicon_function(args)
 
     local volume_t              = awful.tooltip {
         objects = { volicon },
-        bg = colors.background,
-        fg = colors.foreground,
         shape = wibar_widget_shape,
         timer_function = function()
             return backend.util.markup.font("FiraCode Nerd Font Mono, Medium 10",
