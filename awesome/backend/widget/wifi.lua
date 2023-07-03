@@ -15,10 +15,11 @@ local function factory(args)
 
 
     function net.update()
-        local dev         = "wlan0"
-        wifi_now          = {}
-        local now_t       = tonumber(helpers.first_line(string.format("/sys/class/net/%s/statistics/tx_bytes", dev)) or 0)
-        local now_r       = tonumber(helpers.first_line(string.format("/sys/class/net/%s/statistics/rx_bytes", dev)) or 0)
+        local dev   = "wlan0"
+        wifi_now    = {}
+        local now_t = tonumber(helpers.first_line(string.format("/sys/class/net/%s/statistics/tx_bytes", dev)) or 0)
+        local now_r = tonumber(helpers.first_line(string.format("/sys/class/net/%s/statistics/rx_bytes", dev)) or 0)
+
 
         wifi_now.carrier  = helpers.first_line(string.format("/sys/class/net/%s/carrier", dev)) or "0"
         wifi_now.state    = helpers.first_line(string.format("/sys/class/net/%s/operstate", dev)) or "down"
