@@ -1,6 +1,5 @@
 local gears   = require("gears")
 local awful   = require("awful")
-local naughty = require("naughty")
 local backend = require("backend")
 local mytable = awful.util.table or gears.table -- 4.{0,1} compatibility
 
@@ -12,11 +11,8 @@ local cycle_prev = true
 local browser    = "firefox"
 
 globalkeys       = mytable.join(
--- Destroy all notifications
-    awful.key({ "Control", }, "space", function() naughty.destroy_all_notifications() end,
-        { description = "destroy all notifications", group = "hotkeys" }),
 
-    -- X screen locker
+-- X screen locker
     awful.key({ modkey }, "l", function() awful.spawn("betterlockscreen_rapid 20 1") end,
         { description = "lock screen", group = "hotkeys" }),
 
@@ -107,10 +103,8 @@ globalkeys       = mytable.join(
     -- layout changing
     awful.key({ modkey, altkey }, "t", function() awful.layout.set(awful.layout.suit.tile) end,
         { description = "change layout to tile", group = "layout manipulation" }),
-    awful.key({ modkey, altkey }, "d", function() awful.layout.set(awful.layout.suit.spiral.dwindle) end,
+    awful.key({ modkey, altkey }, "f", function() awful.layout.set(awful.layout.suit.floating) end,
         { description = "change layout to dwindle", group = "layout manipulation" }),
-    awful.key({ modkey, altkey }, "s", function() awful.layout.set(awful.layout.suit.spiral.name) end,
-        { description = "change layout to spiral", group = "layout manipulation" }),
 
 
 
@@ -239,6 +233,32 @@ globalkeys       = mytable.join(
             end)
         end,
         { description = "capture selection screenshot", group = "launcher" })
+    ,
+    awful.key({ modkey, "Shift" }, "b", function()
+            for s in screen do
+                s.displaybar.visible = not s.displaybar.visible
+                if s.statusbar then
+                    s.statusbar.visible = not s.statusbar.visible
+                end
+
+                if not s.displaybar.visible then
+                    s.padding = {
+                        top = 0,
+                        bottom = 0,
+                        left = 0,
+                        right = 0
+                    }
+                else
+                    s.padding = {
+                        top = -15,
+                        bottom = 75,
+                        left = 0,
+                        right = 0
+                    }
+                end
+            end
+        end,
+        { description = "toggle wibox", group = "awesome" })
 
 )
 
