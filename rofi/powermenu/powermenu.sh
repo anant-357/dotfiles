@@ -18,13 +18,13 @@ color_shutdown='#00ffff'
 
 # Options
 hibernate=''
-shutdown=''
-reboot=''
-lock=''
+shutdown=''
+reboot=''
+lock=''
 suspend=''
-logout=''
-yes=''
-no=''
+logout='󰍂'
+yes=''
+no=''
 
 # Rofi CMD
 rofi_cmd() {

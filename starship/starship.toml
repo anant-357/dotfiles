@@ -1,64 +1,132 @@
-format = "$all"
-right_format = """$git_branch$git_status$cmd_duration$directory"""
+#                                 
 
-# Disable the blank line at the start of the prompt
-add_newline = false
+format = """
+$time\
+[](fg:#425047 bg:#3A515D)\
+[](fg:#3A515D bg:#3A515D)\
+$username\
+[](fg:#3A515D bg:#4D4C43)\
+$directory\
+[](fg:#4d4c43 bg:#514045)\
+$git_branch\
+$git_status\
+[ ](fg:#514045)\
+"""
 
-[line_break]
-disabled = true
+right_format = """
+[](fg:#232A2e)\
+$time\
+$character
+"""
 
-[character]
-success_symbol = " [](#79740e)"
-error_symbol = " [](#9d0006)"
-vicmd_symbol = "[  ](#78b892)"
-
-[hostname]
-ssh_only = true
-format = "[$hostname](bold green) "
+[username]
+show_always = true
+style_user = "fg:#7fbbb3 bg:#3A515D"
+style_root = "fg:#7fbbb3 bg:#3A515D"
+format = '[$user ]($style)'
 disabled = false
-
-[cmd_duration]
-min_time = 1
-format = "[](fg:#232526 bg:none)[$duration]($style)[](fg:#232526 bg:#232526)[](fg:#bc83e3 bg:#232526)[](fg:#232526 bg:#bc83e3)[](fg:#bc83e3 bg:none) "
-disabled = false
-style = "fg:#edeff0 bg:#232526"
 
 [directory]
-format = "[](fg:#232526 bg:none)[$path]($style)[](fg:#232526 bg:#232526)[](fg:#6791c9 bg:#232526)[](fg:#232526 bg:#6791c9)[](fg:#6791c9 bg:none)"
-style = "fg:#edeff0 bg:#232526"
-truncation_length = 3
-truncate_to_repo=false
+style = "fg:#DBBC7F bg:#4d4c43"
+format = "[ $path ]($style)"
+disabled = false
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
 
 [git_branch]
-format = "[](fg:#232526 bg:none)[$branch]($style)[](fg:#232526 bg:#232526)[](fg:#78b892 bg:#232526)[](fg:#282c34 bg:#78b892)[](fg:#78b892 bg:none) "
-style = "fg:#edeff0 bg:#232526"
+symbol = ""
+style = "fg:#E69875 bg:#514045"
+format = '[ $symbol $branch ]($style)'
+disabled = false
 
 [git_status]
-format="[](fg:#232526 bg:none)[$all_status$ahead_behind]($style)[](fg:#232526 bg:#232526)[](fg:#67afc1 bg:#232526)[](fg:#232526 bg:#67afc1)[](fg:#67afc1 bg:none) "
-style = "fg:#edeff0 bg:#232526"
-conflicted = "="
-ahead =	"⇡${count}"
-behind = "⇣${count}"
-diverged = "⇕⇡${ahead_count}⇣${behind_count}"
-up_to_date = ""
-untracked = "?${count}"
-stashed = ""
-modified = "!${count}"
-staged = "+${count}"
-renamed = "»${count}"
-deleted = "${count}"
+style = "fg:#E69875 bg:#514045"
+format = '[$all_status$ahead_behind ]($style)'
+disabled = false
 
-[git_commit]
-format = "[\\($hash\\)]($style) [\\($tag\\)]($style)"
-style = "green"
+# Start languages and tools #
 
-[git_state]
-rebase = "REBASING"
-merge =	"MERGING"
-revert = "REVERTING"
-cherry_pick = "CHERRY-PICKING"
-bisect = "BISECTING"
-am = "AM"
-am_or_rebase = "AM/REBASE"
-style =	"yellow"
-format = '\([$state( $progress_current/$progress_total)]($style)\) '
+[c]
+symbol = ""
+style = "fg:#D3C6AA bg:#543A48"
+format = '[ $symbol ($version) ]($style)'
+disabled = false
+
+[kubernetes]
+style = "fg:#D3C6AA bg:#3A515D"
+format = '[ on ﴱ ($user on )($cluster in )$context \($namespace\) ]($style)'
+disabled = false
+
+[gcloud]
+symbol = " "
+style = "fg:#D3C6AA bg:#425047"
+format = '[ on $symbol $account(@$domain)(\($region\)) ]($style) '
+# format = '[ on $symbol account@company.iam.gserviceaccount.com(\($region\)) ]($style) ' # for testing purposes
+disabled = false
+
+[golang]
+symbol = ""
+style = "fg:#D3C6AA bg:#475258"
+format = '[ $symbol ($version) ]($style)'
+disabled = false
+
+[java]
+symbol = ""
+style = "fg:#D3C6AA bg:#3D484D"
+format = '[ $symbol ($version) ]($style)'
+disabled = false
+
+[lua]
+symbol = ""
+style = "fg:#D3C6AA bg:#343F44"
+format = '[ $symbol ($version) ]($style)'
+disabled = false
+
+[nodejs]
+symbol = ""
+style = "fg:#D3C6AA bg:#405447"
+format = '[ $symbol ($version) ]($style)'
+disabled = false
+
+[package]
+symbol = ""
+style = "fg:#D3C6AA bg:#543A48"
+format = '[ $symbol ($version) ]($style)'
+disabled = false
+
+[php]
+symbol = ''
+style = "fg:#D3C6AA bg:#4F5B93"
+format = '[ $symbol ($version) ]($style)'
+disabled = false
+
+[python]
+symbol = ''
+style = "fg:#000000 bg:#ffdf76"
+format = '[ $symbol ($version) ]($style)'
+disabled = false
+
+[rust]
+symbol = ""
+style = "fg:#D3C6AA bg:#a72145"
+format = '[ $symbol ($version) ]($style)'
+disabled = false
+
+# End languages and tools #
+
+[time]
+disabled = false
+time_format = "%R" # Hour:Minute Format
+style = "fg:#A7C080 bg:#425047"
+format = '[ 󱑂 $time ]($style)'
+
+[cmd_duration]
+style = "fg:#000000 bg:yellow"
+format = "[ took $duration ]($style)"
+
+[character]
+format = " $symbol"
