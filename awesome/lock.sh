@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+fg='5C6A72FF' 
+bg='FDF6E3FF'
+i3lock \
+    --color=000000FF \
+    --screen 1		\
+    --blur 15		\
+    --inside-color=$fg \
+    --insidever-color=$fg \
+    --insidewrong-color=$fg \
+    --ring-color=$fg \
+    --ringver-color=FABD2FFF \
+    --ringwrong-color=FB4934FF \
+    --separator-color=$fg \
+    --line-color=$bg \
+    --keyhl-color=$bg \
+    --bshl-color=FB4934FF \
+    --ring-width=6 \
+    --radius=32 \
+    --time-color=$fg \
+    --time-str='%H:%M' \
+    --time-font='Fira Code, Medium' \
+    --time-align=2 \
+    --time-size=18 \
+    --time-pos="960:35" \
+    --ind-pos="928:1028"    \
+    --date-color=$bg \
+    --date-str='%d|%m|%y' \
+    --date-font='Fira Code, Medium' \
+    --date-align=1 \
+    --date-size=48 \
+    --date-pos="800:520" \
+    --verif-color=00000000 \
+    --wrong-color=00000000 \
+    --modif-color=00000000 \
+    --layout-color=00000000 \
+    --greeter-color=00000000 \
+    --verif-text='' \
+    --wrong-text='' \
+    --noinput-text='' \
+    --lock-text='password to pass' \
+    --lockfailed-text='' \
+    --greeter-text='password to pass' \
+    --ignore-empty-password \
+    --pass-media-keys \
+    --pass-screen-keys \
+    --indicator \
+    --clock
