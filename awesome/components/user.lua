@@ -5,12 +5,14 @@ local functions             = require("functions")
 local wibar_widget_enhancor = functions.wi_widget_enhancor
 local beautiful             = require("beautiful")
 local gears                 = require("gears")
+local markup = require("backend.util.markup")
+
 
 
 
 local function user(args)
-    local user_text        = wibox.widget.textbox(" Hi " .. os.getenv("USER") .. "! ----->>")
-    local user_github      = wibox.widget.textbox(" ")
+    local user_text        = wibox.widget.textbox(markup.fg.color(beautiful.user_fg," Hi " .. os.getenv("USER") .. "! ----->>"))
+    local user_github      = wibox.widget.textbox(markup.fg.color(beautiful.user_fg," "))
     local height           = 30
     local width            = 30
     local user_image_shape = function(cr)

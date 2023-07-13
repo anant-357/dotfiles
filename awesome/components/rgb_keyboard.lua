@@ -3,12 +3,14 @@ local wibox                 = require("wibox")
 local functions             = require("functions")
 local wibar_widget_enhancor = functions.wi_widget_enhancor
 local beautiful             = require("beautiful")
+local markup = require("backend.util.markup")
+
 
 local function rgb_keyboard_icon(args)
     local container_bool                  = args.container or "no"
     local font_size                       = args.font_size or 14
 
-    local rgb_keyboard_icon               = wibox.widget.textbox(' ')
+    local rgb_keyboard_icon               = wibox.widget.textbox(markup.fg.color(beautiful.rgb_keyboard_fg,' '))
 
     rgb_keyboard_icon.font                = "Symbols Nerd Font Mono " .. tostring(font_size)
 

@@ -1,22 +1,22 @@
-local awful                 = require("awful")
-local wibox                 = require("wibox")
-local functions             = require("functions")
+local awful = require("awful")
+local wibox = require("wibox")
+local functions = require("functions")
 local wibar_widget_enhancor = functions.wi_widget_enhancor
-local wibar_widget_shape    = functions.wi_widget_shape
-local backend               = require("backend")
-local beautiful             = require("beautiful")
-local spr                   = wibox.widget.textbox(' ')
+local wibar_widget_shape = functions.wi_widget_shape
+local backend = require("backend")
+local beautiful = require("beautiful")
+local markup = require("backend.util.markup")
 
+local spr = wibox.widget.textbox(' ')
 
-local spotify_icon           = wibox.widget.textbox("󰽳")
-spotify_icon.font            = "Symbols Nerd Font Mono 11"
+local spotify_icon = wibox.widget.textbox(markup.fg.color(beautiful.spotify_fg, "󰽳"))
+spotify_icon.font = "Symbols Nerd Font Mono 11"
 
-local spotify_next_song_icon = wibox.widget.textbox("󰍟")
-spotify_next_song_icon.font  = "Symbols Nerd Font Mono 11"
+local spotify_next_song_icon = wibox.widget.textbox(markup.fg.color(beautiful.spotify_fg, "󰍟"))
+spotify_next_song_icon.font = "Symbols Nerd Font Mono 11"
 
-local spotify_prev_song_icon = wibox.widget.textbox("󰍞")
-spotify_prev_song_icon.font  = "Symbols Nerd Font Mono 11"
-
+local spotify_prev_song_icon = wibox.widget.textbox(markup.fg.color(beautiful.spotify_fg, "󰍞"))
+spotify_prev_song_icon.font = "Symbols Nerd Font Mono 11"
 
 local spotify_all = wibox.widget {
     spotify_prev_song_icon,
@@ -27,57 +27,52 @@ local spotify_all = wibox.widget {
     layout = wibox.layout.fixed.horizontal
 }
 
-
 local spotify_all_containerized = wibar_widget_enhancor(spotify_all, beautiful.spotify_bg)
 
-local spot_t_now                = {}
+local spot_t_now = {}
 
-local spotify                   = backend.widget.spotify({
+local spotify = backend.widget.spotify({
     timeout = 1,
     settings = function()
         if spotify_now.status == "on" then
-            spotify_icon:set_text("")
+            spotify_icon:set_markup_silently(markup.fg.color(beautiful.spotify_fg, ""))
             spotify_icon.font = "Symbols Nerd Font Mono 12"
         else
-            spotify_icon:set_text("󰽳")
+            spotify_icon:set_markup_silently(markup.fg.color(beautiful.spotify_fg, "󰽳"))
             spotify_icon.font = "Symbols Nerd Font Mono 10"
         end
         spot_t_now = spotify_now
     end
 })
 
-spotify_icon:buttons(awful.util.table.join(
-    awful.button({}, 1, function()
-        if spot_t_now.status == "on" then
-            awful.spawn.easy_async(
-                "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause",
-                function() end)
-        else
-            awful.spawn.easy_async("spotify", function() end
-            )
-        end
-    end)
-))
-
-spotify_next_song_icon:buttons(awful.util.table.join(
-    awful.button({}, 1, function()
+spotify_icon:buttons(awful.util.table.join(awful.button({}, 1, function()
+    if spot_t_now.status == "on" then
         awful.spawn.easy_async(
-            "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next",
-            function() end)
-    end)
-))
+            "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause",
+            function()
+            end)
+    else
+        awful.spawn.easy_async("spotify", function()
+        end)
+    end
+end)))
 
-spotify_prev_song_icon:buttons(awful.util.table.join(
-    awful.button({}, 1, function()
-        awful.spawn.easy_async(
-            "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous",
-            function() end)
-    end)
-))
+spotify_next_song_icon:buttons(awful.util.table.join(awful.button({}, 1, function()
+    awful.spawn.easy_async(
+        "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next",
+        function()
+        end)
+end)))
 
+spotify_prev_song_icon:buttons(awful.util.table.join(awful.button({}, 1, function()
+    awful.spawn.easy_async(
+        "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous",
+        function()
+        end)
+end)))
 
-local spotify_t           = awful.tooltip {
-    objects = { spotify_icon },
+local spotify_t = awful.tooltip {
+    objects = {spotify_icon},
     shape = wibar_widget_shape,
     timer_function = function()
         if spot_t_now.status == "off" then
@@ -91,7 +86,7 @@ local spotify_t           = awful.tooltip {
 }
 
 local spotify_next_song_t = awful.tooltip {
-    objects = { spotify_next_song_icon },
+    objects = {spotify_next_song_icon},
     shape = wibar_widget_shape,
     timer_function = function()
         if spot_t_now.status == "off" then
@@ -103,7 +98,7 @@ local spotify_next_song_t = awful.tooltip {
 }
 
 local spotify_prev_song_t = awful.tooltip {
-    objects = { spotify_prev_song_icon },
+    objects = {spotify_prev_song_icon},
     shape = wibar_widget_shape,
     timer_function = function()
         if spot_t_now.status == "off" then

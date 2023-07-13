@@ -5,6 +5,7 @@ local wibar_widget_enhancor = functions.wi_widget_enhancor
 local wibar_widget_shape    = functions.wi_widget_shape
 local backend               = require("backend")
 local beautiful             = require("beautiful")
+local markup = require("backend.util.markup")
 
 
 local function webcam_function(args)
@@ -20,10 +21,10 @@ local function webcam_function(args)
         timeout = 1,
         settings = function()
             if webcam_now.status == "off" then
-                webcam_icon:set_text("")
+                webcam_icon:set_markup_silently(markup.fg.color(beautiful.webcam_fg,""))
                 webcam_icon.font = "Symbols Nerd Font Mono 12"
             else
-                webcam_icon:set_text("")
+                webcam_icon:set_markup_silently(markup.fg.color(beautiful.webcam_fg,""))
                 webcam_icon.font = "Symbols Nerd Font Mono 12"
             end
             webcam_status = webcam_now
