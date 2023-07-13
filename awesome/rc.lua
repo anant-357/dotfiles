@@ -15,6 +15,7 @@ require("main.taglist")
 
 require("main.wallpaper")
 
+require("main.notifications")
 
 require("main.mouse")
 
