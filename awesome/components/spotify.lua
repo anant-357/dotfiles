@@ -73,39 +73,32 @@ end)))
 
 local spotify_t = awful.tooltip {
     objects = {spotify_icon},
-    shape = wibar_widget_shape,
     timer_function = function()
         if spot_t_now.status == "off" then
-            return backend.util.markup.font("Fira Code, Medium 10", "Spotify not running")
+            return "Spotify not running"
         end
-        local ret = backend.util.markup.font("FiraCode Nerd Font Mono, Medium 10",
-            string.format("Song: %s\nArtist: %s\nAlbum: %s\n%s", spot_t_now.title, spot_t_now.artist, spot_t_now.album,
-                spot_t_now.playing))
-        return ret
+        return string.format("Song: %s\nArtist: %s\nAlbum: %s\n%s", spot_t_now.title, spot_t_now.artist,
+            spot_t_now.album, spot_t_now.playing)
     end
 }
 
 local spotify_next_song_t = awful.tooltip {
     objects = {spotify_next_song_icon},
-    shape = wibar_widget_shape,
     timer_function = function()
         if spot_t_now.status == "off" then
-            return backend.util.markup.font("Fira Code, Medium 10", "Spotify not running")
+            return "Spotify not running"
         end
-        local ret = backend.util.markup.font("FiraCode Nerd Font Mono, Medium 10", "Next Song")
-        return ret
+        return "Next Song"
     end
 }
 
 local spotify_prev_song_t = awful.tooltip {
     objects = {spotify_prev_song_icon},
-    shape = wibar_widget_shape,
     timer_function = function()
         if spot_t_now.status == "off" then
-            return backend.util.markup.font("Fira Code, Medium 10", "Spotify not running")
+            return "Spotify not running"
         end
-        local ret = backend.util.markup.font("FiraCode Nerd Font Mono, Medium 10", "Previous Song")
-        return ret
+        return "Previous Song"
     end
 }
 

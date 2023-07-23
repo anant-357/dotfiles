@@ -13,18 +13,19 @@ local function timeicon_function(args)
 
     local time_containerized = wibar_widget_enhancor(time, beautiful.time_bg)
 
+    if container_bool == "no" then
+        time_containerized = time
+    end
+
     local time_t = awful.tooltip {
         objects = {time_containerized},
-        shape = wibar_widget_shape,
         timer_function = function()
-            return backend.util.markup.font("FiraCode Nerd Font Mono, Medium 10", string.format("Time"))
+            return string.format(os.date('%B %d %Y, %A\n%T'))
         end
     }
-    if container_bool == "yes" then
-        return time_containerized
-    else
-        return time
-    end
+
+    return time_containerized
+
 end
 
 return timeicon_function

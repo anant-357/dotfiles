@@ -49,15 +49,13 @@ local function neticon_function(args)
 
     local net_t = awful.tooltip {
         objects = {neticon},
-        shape = wibar_widget_shape,
         timer_function = function()
             -- local ret
             if net_status.state == "down" then
-                return backend.util.markup.font("FiraCode Nerd Font Mono, Medium 10", "Wifi Off")
+                return "Wifi Off"
             else
-                return backend.util.markup.font("FiraCode Nerd Font Mono, Medium 10", string.format(
-                    "%sDownload: %02.1f Mbps\nUpload: %02.1f Mbps", net_status.info, net_status.received,
-                    net_status.sent))
+                return string.format("%sDownload: %02.1f Mbps\nUpload: %02.1f Mbps", net_status.info,
+                    net_status.received / 80, net_status.sent / 80)
             end
 
             -- return ret

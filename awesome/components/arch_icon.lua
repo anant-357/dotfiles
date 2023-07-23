@@ -20,6 +20,12 @@ local function arch_icon_dynamic(args)
     end), awful.button({}, 3, function()
     end)))
 
+    local arch_icon_t = awful.tooltip {
+        objects = {arch_icon},
+        timer_function = function()
+            return "Settings"
+        end
+    }
     return arch_icon_containerized
 end
 

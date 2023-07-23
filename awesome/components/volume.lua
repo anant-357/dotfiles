@@ -7,8 +7,7 @@ local backend = require("backend")
 local beautiful = require("beautiful")
 local markup = require("backend.util.markup")
 
-local cmd =
-    "pactl list sinks | sed -n -e '/Driver:/p' -e '/Volume:/p' -e '/Mute:/p' | tail -4"
+local cmd = "pactl list sinks | sed -n -e '/Driver:/p' -e '/Volume:/p' -e '/Mute:/p' | tail -4"
 
 local function volicon_function(args)
     local container_bool = args.container or "no"
@@ -56,10 +55,8 @@ local function volicon_function(args)
 
     local volume_t = awful.tooltip {
         objects = {volicon},
-        shape = wibar_widget_shape,
         timer_function = function()
-            return backend.util.markup.font("FiraCode Nerd Font Mono, Medium 10",
-                string.format("Volume: %s&#37;\n", volume_status.left))
+            return string.format("Volume: %s&#37;", volume_status.left)
         end
     }
 

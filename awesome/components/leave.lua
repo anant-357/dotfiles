@@ -22,9 +22,8 @@ local function leaveicon_function(args)
 
     local leave_t = awful.tooltip {
         objects = {leave_icon},
-        shape = wibar_widget_shape,
         timer_function = function()
-            return backend.util.markup.font("FiraCode Nerd Font Mono, Medium 10", "Exit Menu")
+            return "Exit Menu"
         end
     }
 

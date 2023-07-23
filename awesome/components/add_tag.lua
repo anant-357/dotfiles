@@ -9,4 +9,11 @@ add_tag:buttons(awful.util.table.join(awful.button({}, 1, function()
     backend.util.add_tag()
 end)))
 
+local add_tag_t = awful.tooltip {
+    objects = {add_tag},
+    timer_function = function()
+        return "Add new tag"
+    end
+}
+
 return add_tag

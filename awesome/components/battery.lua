@@ -55,12 +55,8 @@ local function baticon_function(args)
 
     local battery_t = awful.tooltip {
         objects = {baticon},
-        shape = wibar_widget_shape,
         timer_function = function()
-            local msg = ""
-            msg = msg .. backend.util.markup.font("FiraCode Nerd Font Mono, Medium 10",
-                string.format("%s %s&#37;\n", bat_status.status, bat_status.perc))
-            return msg .. backend.util.markup.font("FiraCode Nerd Font Mono, Medium 10", bat_status.time .. " left")
+            return string.format("%s %s&#37;\n", bat_status.status, bat_status.perc) .. bat_status.time .. " left"
         end
     }
     if container_bool == "yes" then

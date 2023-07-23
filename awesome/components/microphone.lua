@@ -48,10 +48,8 @@ local function volicon_function(args)
 
     local volume_t = awful.tooltip {
         objects = {volicon},
-        shape = wibar_widget_shape,
         timer_function = function()
-            return backend.util.markup.font("FiraCode Nerd Font Mono, Medium 10",
-                string.format("Level: %s&#37;\n", volume_status.left))
+            return string.format("Level: %s&#37;", volume_status.left)
         end
     }
 

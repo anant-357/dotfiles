@@ -37,13 +37,12 @@ local function neticon_function(args)
 
     local net_t = awful.tooltip {
         objects = {neticon},
-        shape = wibar_widget_shape,
         timer_function = function()
             if net_status.carrier == "0" then
-                return backend.util.markup.font("FiraCode Nerd Font Mono, Medium 10", "Not Connected")
+                return "Not Connected"
             end
-            return backend.util.markup.font("FiraCode Nerd Font Mono, Medium 10", string.format(
-                "Download: %02.1f Mbps\nUpload: %02.1f Mbps", net_status.recieved / 1024, net_status.sent / 1024))
+            return string.format("Download: %02.1f Mbps\nUpload: %02.1f Mbps", net_status.recieved / 1024,
+                net_status.sent / 1024)
         end
     }
     if container_bool == "yes" then

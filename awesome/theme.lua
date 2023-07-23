@@ -1,11 +1,14 @@
 local dpi = require("beautiful.xresources").apply_dpi
 local os = os
 local gears = require("gears")
+local functions = require("functions")
+local wibar_widget_shape = functions.wi_widget_shape
+local awful = require("awful")
 local theme = {}
 theme.dir = os.getenv("HOME") .. "/.config/awesome/"
-theme.wallpaper = theme.dir .. "/wallpapers/gruvbox/deer.jpg"
-theme.colors = require("colorschemes.everforest.main")
-theme.mode = theme.colors.light
+theme.wallpaper = theme.dir .. "/wallpapers/monochrome-clouds.jpg"
+theme.colors = require("colorschemes.monochrome.main")
+theme.mode = theme.colors.dark
 theme.font = "Fira Code, Medium 11"
 theme.fg_normal = theme.mode.fg0
 theme.fg_focus = theme.mode.fg1
@@ -32,9 +35,13 @@ theme.notification_bg = theme.mode.bg
 theme.notification_fg = theme.mode.fg
 theme.tooltip_bg = theme.mode.bg
 theme.tooltip_fg = theme.mode.fg
+theme.tooltip_font = "Fira Code, Medium 10"
+theme.tooltip_shape = wibar_widget_shape
+theme.tooltip_border_color = theme.mode.fg1
+theme.tooltip_border_width = dpi(3)
 theme.border_width = dpi(1.5)
 theme.border_normal = theme.mode.fg1
-theme.border_focus = theme.mode.fg0
+theme.border_focus = theme.mode.fg2
 theme.border_marked = "#CC9393"
 
 theme.user_image = theme.dir .. "assets/pfp.jpg"
@@ -165,6 +172,9 @@ if file then
     file:write(theme.pacwall_conf)
     file:close()
 end
-os.execute("pacwall -u")
+-- os.execute("pacwall -u")
 
+awful.screen.connect_for_each_screen(function(s)
+    gears.wallpaper.maximized(theme.wallpaper, s, true)
+end)
 return theme

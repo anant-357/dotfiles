@@ -42,25 +42,21 @@ local function bluetooth_icon_function(args)
         end
     end)))
 
-    local spotify_t = awful.tooltip {
+    local bluetooth_t = awful.tooltip {
         objects = {bluetooth_icon},
-        shape = wibar_widget_shape,
         timer_function = function()
             if bluetooth_status.status == "off" then
-                return backend.util.markup.font("Fira Code, Medium 10", "Bluetooth Off")
+                return "Bluetooth Off"
             end
 
             if bluetooth_status.is_connected == "no" then
-                return backend.util.markup.font("Fira Code, Medium 10", "Not connected")
+                return "Not connected"
             end
 
-            local ret = backend.util.markup.font("FiraCode Nerd Font Mono, Medium 10",
-                string.format("Name: %s\n", bluetooth_status.connected.name))
+            local ret = string.format("Name: %s\n", bluetooth_status.connected.name)
             if bluetooth_status.connected.battery == "N/A" or nil then
             else
-                ret = ret .. backend.util.markup.font("FiraCode Nerd Font Mono, Medium 10", string.format("Battery: %s",
-                    tostring(tonumber(bluetooth_status.connected.battery))))
-                ret = ret .. backend.util.markup.font("FiraCode Nerd Font Mono, Medium 10", "%")
+                ret = ret .. string.format("Battery: %s&#37;", tostring(tonumber(bluetooth_status.connected.battery)))
             end
 
             return ret
