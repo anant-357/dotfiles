@@ -11,9 +11,17 @@ Terminal : Kitty
 
 ## screenshots
 
+### Grub
+
+![desktop](https://github.com/anant-357/dotfiles/blob/main/screenshots/grub.png?raw=true)
+
 ### Gruvbox
 
 ![desktop](https://github.com/anant-357/dotfiles/blob/main/screenshots/2023-06-10-152948_1920x1080_scrot.png?raw=true)
+
+### Monochrome
+
+![desktop](https://github.com/anant-357/dotfiles/blob/main/screenshots/monochrome.png?raw=true)
 
 ### Everforest
 
