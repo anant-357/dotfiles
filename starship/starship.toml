@@ -10,6 +10,7 @@ $directory\
 [](fg:#4d4c43 bg:#514045)\
 $git_branch\
 $git_status\
+$python\
 [ ](fg:#514045)\
 """
 
@@ -106,8 +107,8 @@ disabled = false
 
 [python]
 symbol = ''
-style = "fg:#000000 bg:#ffdf76"
-format = '[ $symbol ($version) ]($style)'
+style = "fg:#DBBC7F bg:#4d4c43"
+format = '[(${symbol})]($style)'
 disabled = false
 
 [rust]
