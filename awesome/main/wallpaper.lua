@@ -14,6 +14,6 @@ screen.connect_signal("property::geometry", function(s)
     end
 end)
 
-awful.screen.connect_for_each_screen(function(s) -- If wallpaper is a function, call it with the screen
-    awful.spawn.easy_async_with_shell("pacwall -ug", function() end)
-end)
+-- awful.screen.connect_for_each_screen(function(s) -- If wallpaper is a function, call it with the screen
+--     awful.spawn.easy_async_with_shell("pacwall -ug", function() end)
+-- end)
