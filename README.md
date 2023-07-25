@@ -22,6 +22,7 @@ Terminal : Kitty
 ### Monochrome
 
 ![desktop](https://github.com/anant-357/dotfiles/blob/main/screenshots/monochrome.png?raw=true)
+![dashboard](https://github.com/anant-357/dotfiles/blob/main/screenshots/dashboard.png?raw=true)
 
 ### Everforest
 
