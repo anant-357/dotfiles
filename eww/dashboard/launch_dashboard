@@ -1,0 +1,18 @@
+#!/bin/bash
+if [[ ! `pidof eww` ]]; then
+	eww daemon;
+fi
+
+eww --config $HOME/.config/eww/dashboard open-many \
+	background \
+	profile \
+	system \
+	clock \
+	uptime \
+	music \
+	close \
+	weather \
+	logout \
+	sleep \
+	reboot \
+	poweroff 

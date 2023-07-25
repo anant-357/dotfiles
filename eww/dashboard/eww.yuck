@@ -1,0 +1,199 @@
+;; Profile vars
+(defvar IMAGE "images/profile.jpg")
+(defvar NAME "Anant")
+(defpoll UNAME :interval "5m" `whoami`)
+
+;; System vars
+(defpoll HOST :interval "5s" `hostname`)
+(defpoll CPU_USAGE :interval "1s" :initial `scripts/sys_info --cpu` `scripts/sys_info --cpu`)
+(defpoll MEM_USAGE :interval "1s" :initial `scripts/sys_info --mem` `scripts/sys_info --mem`)
+(defpoll BLIGHT :interval "1s" :initial `scripts/sys_info --blight` `scripts/sys_info --blight`)
+(defpoll BATTERY :interval "5s" :initial `scripts/sys_info --bat` `scripts/sys_info --bat`)
+
+;; Time vars
+(defpoll HOUR :interval "5s" `date +\"%I\"`)
+(defpoll MIN :interval "5s" `date +\"%M\"`)
+(defpoll MER :interval "5s" `date +\"%p\"`)
+(defpoll DAY :interval "5s" `date +\"%A\"`)
+
+;; Uptime vars
+(defpoll UPHOUR :interval "5s" `uptime -p | awk '{print $2 \" \" $3}' | sed 's/,//g'`)
+(defpoll UPMIN :interval "5s" `uptime -p | awk '{print $4 \" \" $5}'`)
+
+;; Music vars
+(defpoll SONG :interval "1s" `scripts/music song`)
+(defpoll ARTIST :interval "1s" `scripts/music artist`)
+(defpoll STATUS :interval "1s" `scripts/music status`)
+(defpoll CURRENT :interval "1s" `scripts/music time`)
+(defpoll COVER :interval "1s" `scripts/music cover`)
+
+;; Weather vars
+(defpoll ICON :interval "10s" `scripts/weather_info --icon`)
+(defpoll STAT :interval "10s" `scripts/weather_info --stat`)
+(defpoll TEMP :interval "10s" `scripts/weather_info --temp`)
+(defpoll HEX :interval "10s" `scripts/weather_info --hex`)
+(defpoll QUOTE :interval "10s" `scripts/weather_info --quote`)
+(defpoll QUOTE2 :interval "10s" `scripts/weather_info --quote2`)
+
+
+
+;; ** Widgets *************************************************************************
+
+
+;; background
+(defwidget bg []
+  (box :class "bg")
+)
+
+;; profile
+(defwidget user []
+  (box :class "genwin" :orientation "v" :spacing 35 :space-evenly "false" :vexpand "false" :hexpand "false"
+    (box :class "face" :halign "center" "󰲓")
+    (label :class "fullname" :halign "center" :wrap "true" :limit-width 25 :text NAME)
+    (label :class "username" :halign "center" :wrap "true" :limit-width 25 :text UNAME)))
+
+;; system
+(defwidget system []
+  (box :class "genwin" :vexpand "false" :hexpand "false"
+    (box :orientation "v" :spacing 35 :halign "center" :valign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
+      (box :class "cpu_bar" :orientation "h" :spacing 20 :space-evenly "false" :vexpand "false" :hexpand "false"
+        (label :class "iconcpu" :text "")
+        (scale :min 0 :max 100 :value CPU_USAGE :active "false"))
+      (box :class "mem_bar" :orientation "h" :spacing 20 :space-evenly "false" :vexpand "false" :hexpand "false"
+        (label :class "iconmem" :text "")
+        (scale :min 0 :max 100 :value MEM_USAGE :active "false"))
+      (box :class "bright_bar" :orientation "h" :spacing 20 :space-evenly "false" :vexpand "false" :hexpand "false"
+        (label :class "iconbright" :text "")
+        (scale :min 0 :max 100 :value BLIGHT :active "false"))
+      (box :class "bat_bar" :orientation "h" :spacing 20 :space-evenly "false" :vexpand "false" :hexpand "false"
+        (label :class "iconbat" :text "")
+        (scale :min 0 :max 100 :value BATTERY :active "false")))))
+
+;; clock
+(defwidget clock []
+  (box :class "genwin" :orientation "h" :spacing 10 :space-evenly false :vexpand "false" :hexpand "false"
+    (box :orientation "h" :spacing 20
+      (label :class "time_hour" :valign "start" :wrap "true" :limit-width 25 :text HOUR)
+      (label :class "time_min" :valign "end" :wrap "true" :limit-width 25 :text MIN))
+    (box :orientation "v" :spacing 20
+      (label :class "time_mer" :valign "start" :halign "end" :wrap "true" :limit-width 25 :text MER)
+      (label :class "time_day" :valign "end" :halign "end" :wrap "true" :limit-width 25 :text DAY))))
+
+;; uptime
+(defwidget uptime []
+  (box :class "genwin"
+    (box :orientation "h" :halign "center" :spacing 40 :space-evenly "false" :vexpand "false" :hexpand "false"
+      (label :class "icontimer" :valign "center" :text "祥")
+      (box :orientation "v" :valign "center" :spacing 0 :space-evenly "false" :vexpand "false" :hexpand "false"
+        (label :class "uphour" :halign "start" :wrap "true" :limit-width 25 :text UPHOUR)
+        (label :class "upmin" :halign "start" :wrap "true" :limit-width 25 :text UPMIN)))))
+
+;; Music
+(defwidget music []
+  (box :class "genwin" :orientation "h" :space-evenly "true" :vexpand "false" :hexpand "false"
+    (box :orientation "v" :spacing 20 :space-evenly "true" :vexpand "false" :hexpand "false"
+      (label :halign "center" :class "song" :wrap "true" :limit-width 20 :text SONG)
+      (label :halign "center" :class "artist" :wrap "true" :limit-width 15 :text ARTIST)
+      (box :orientation "h" :spacing 20 :halign "center" :space-evenly "true" :vexpand "false" :hexpand "false"
+        (button :class "btn_prev" :onclick "scripts/music prev" "玲")
+        (button :class "btn_play" :onclick "scripts/music toggle" STATUS)
+        (button :class "btn_next" :onclick "scripts/music next" "怜"))
+      (box :class "music_bar" :halign "center" :vexpand "false" :hexpand "false"
+        (scale :min 0 :active "true" :max 100 :value CURRENT)))))
+
+;; close
+(defwidget close []
+  (box :class "close" :vexpand "false" :hexpand "false"
+    (button :class "close_button" :onclick "/sbin/eww --config /home/zinnia/.config/eww/dashboard kill"
+      (label :class "close_text" :halign "center" :wrap "true" :limit-width 25 :text "X"))))
+
+
+;; weather
+(defwidget weather []
+  (box :class "genwin"
+    (box :orientation "v" :spacing 10 :space-evenly "true" :vexpand "false" :hexpand "false"
+      (box :orientation "h" :vexpand "false" :hexpand "true"
+        (label :class "iconweather" :halign "start" :style "color: ${HEX};" :text ICON)
+        (label :class "label_temp" :halign "end" :text TEMP))
+      (box :orientation "v" :spacing 10 :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
+        (label :class "label_stat" :text STAT)
+        (label :class "label_quote" :text QUOTE)
+        (label :class "label_quote" :text QUOTE2)))))
+
+
+;; power buttons
+(defwidget logout []
+  (box :class "genwin" :vexpand "false" :hexpand "false"
+    (button :class "btn_logout" :onclick "pkill awesome" "")))
+(defwidget sleep []
+  (box :class "genwin" :vexpand "false" :hexpand "false"
+    (button :class "btn_sleep" :onclick "systemctl suspend" "")))
+(defwidget reboot []
+  (box :class "genwin" :vexpand "false" :hexpand "false"
+    (button :class "btn_reboot" :onclick "systemctl reboot" "")))
+(defwidget poweroff []
+  (box :class "genwin" :vexpand "false" :hexpand "false"
+    (button :class "btn_poweroff" :onclick "systemctl poweroff" "")))
+
+;; ** Windows *************************************************************************
+
+
+;; background
+(defwindow background :stacking "fg" :focusable "false" :screen 1
+  :geometry (geometry :x 0 :y 0 :width "1920px" :height "1080px")
+  (bg))
+
+;; profile
+(defwindow profile :stacking "fg" :focusable "false" :screen 1
+  :geometry (geometry :x 100 :y 100 :width 400 :height 400)
+  (user))
+
+;; system
+(defwindow system :stacking "fg" :focusable "false" :screen 1
+  :geometry (geometry :x 100 :y 550 :width 420 :height 430)
+  (system))
+
+;; clock
+(defwindow clock :stacking "fg" :focusable "false" :screen 1
+  :geometry (geometry :x 550 :y 100 :width 400 :height 175)
+  (clock))
+
+;; uptime
+(defwindow uptime :stacking "fg" :focusable "false" :screen 1
+  :geometry (geometry :x 550 :y 325 :width 400 :height 175)
+  (uptime))
+
+;; music
+(defwindow music :stacking "fg" :focusable "false" :screen 1
+  :geometry (geometry :x 570 :y 550 :width 650 :height 430)
+  (music))
+
+;; weather
+(defwindow weather :stacking "fg" :focusable "false" :screen 1
+  :geometry (geometry :x 1000 :y 100 :width 600 :height 400)
+  (weather))
+
+;; close
+(defwindow close :stacking "fg" :focusable "false" :screen 1
+  :geometry (geometry :x 1650 :y 100 :width 170 :height 400)
+  (close))
+
+;; logout
+(defwindow logout :stacking "fg" :focusable "false" :screen 1
+  :geometry (geometry :x 1270 :y 550 :width 250 :height 190)
+  (logout))
+
+;; sleep
+(defwindow sleep :stacking "fg" :focusable "false" :screen 1
+  :geometry (geometry :x 1570 :y 550 :width 250 :height 190)
+  (sleep))
+
+;; reboot
+(defwindow reboot :stacking "fg" :focusable "false" :screen 1
+  :geometry (geometry :x 1270 :y 790 :width 250 :height 190)
+  (reboot))
+
+;; poweroff
+(defwindow poweroff :stacking "fg" :focusable "false" :screen 1
+  :geometry (geometry :x 1570 :y 790 :width 250 :height 190)
+  (poweroff))

@@ -1,0 +1,55 @@
+#!/bin/python3
+
+import sys
+from pydbus import SessionBus
+import requests
+
+
+bus = SessionBus()
+spotify_object = None
+try:
+    spotify_object = bus.get(
+        "org.mpris.MediaPlayer2.spotify", "/org/mpris/MediaPlayer2"
+    )
+except:
+    pass
+# print(spotify_object.Metadata["xesam:title"])
+
+args = sys.argv
+if len(args) != 2:
+    print("Error")
+else:
+    if args[1] == "song":
+        if spotify_object:
+            print(spotify_object.Metadata["xesam:title"])
+        else:
+            print("Offline")
+    elif args[1] == "time":
+        print(
+            int(spotify_object.Position)
+            * 100
+            / int(spotify_object.Metadata["mpris:length"])
+        )
+    elif args[1] == "artist":
+        if spotify_object:
+            print("".join(spotify_object.Metadata["xesam:artist"]))
+        else:
+            print("Offline")
+    elif args[1] == "status":
+        if spotify_object:
+            print("")
+        else:
+            print("喇")
+    elif args[1] == "cover":
+        url = spotify_object.Metadata["mpris:artUrl"]
+        r = requests.get(url, allow_redirects=True)
+        open("images/cover.jpg", "wb+").write(r.content)
+        print("images/cover.jpg")
+    elif args[1] == "toggle":
+        spotify_object.PlayPause()
+    elif args[1] == "next":
+        spotify_object.Next()
+    elif args[1] == "prev":
+        spotify_object.Previous()
+    else:
+        pass
