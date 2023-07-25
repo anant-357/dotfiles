@@ -1,0 +1,91 @@
+/*****----- Configuration -----*****/
+configuration {
+    show-icons:                 false;
+}
+
+/*****----- Global Properties -----*****/
+* {
+    font:                        "Iosevka Semibold 10";
+    background:     #282828FF;
+    background-alt: #353535FF;
+    foreground:     #EBEBEBFF;
+    selected:       #929292FF;
+    active:         #B8B8B8FF;
+    urgent:         #FBFBFBFF;
+}
+
+/*
+USE_BUTTONS=YES
+*/
+
+/*****----- Main Window -----*****/
+window {
+    transparency:                "real";
+    fullscreen: true;
+    background-color: #282828d0;
+    
+    border-color:                transparent;
+    cursor:                      "default";
+    // background-color:            transparent;
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    location:                    center;
+    anchor:                      center;
+    fullscreen:                  false;
+    width:                       800px;
+    x-offset:                    0px;
+    y-offset:                    0px;
+    background-color:            transparent;
+    orientation:                 horizontal;
+    children:                    ["listview"];
+    padding:                     0px;
+    border:                      0px solid;
+    // border-radius:               15px;
+}
+
+
+/*****----- Listview -----*****/
+listview {
+    enabled:                     true;
+    columns:                     6;
+    lines:                       1;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      horizontal;
+    reverse:                     false;
+    fixed-height:                true;
+    fixed-columns:               true;
+    
+    spacing:                     20px;
+    margin:                      40px;
+    background-color:            transparent;
+    cursor:                      "default";
+}
+
+/*****----- Elements -----*****/
+element {
+    enabled:                     true;
+    padding:                     20px 30px;
+    border-radius:               10px;
+    background-color:            @background-alt;
+    text-color:                  @background-alt;
+    cursor:                      pointer;
+}
+element-text {
+    font:                        "feather bold 32";
+    background-color:            transparent;
+    text-color:                  inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+}
+element selected.normal {
+    background-color:            var(background-alt);
+    text-color:                  var(foreground);
+}
+
+
+

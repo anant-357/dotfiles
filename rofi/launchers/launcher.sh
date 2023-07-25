@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 dir="$HOME/.config/rofi/launchers/"
-theme='launcher-theme'
+theme='launcher-monochrome'
 
 ## Run
 rofi \

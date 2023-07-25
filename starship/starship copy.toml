@@ -2,33 +2,33 @@
 
 format = """
 $time\
-[](fg:#424242 bg:#3A3A3A)\
-[](fg:#3A3A3A bg:#3A3A3A)\
+[](fg:#425047 bg:#3A515D)\
+[](fg:#3A515D bg:#3A515D)\
 $username\
-[](fg:#3A3A3A bg:#4D4D4D)\
+[](fg:#3A515D bg:#4D4C43)\
 $directory\
-[](fg:#4D4D4D bg:#515151)\
+[](fg:#4d4c43 bg:#514045)\
 $git_branch\
 $git_status\
 $python\
-[ ](fg:#515151)\
+[ ](fg:#514045)\
 """
 
 right_format = """
-[](fg:#232323)\
+[](fg:#232A2e)\
 $time\
 $character
 """
 
 [username]
 show_always = true
-style_user = "fg:#747474 bg:#3A3A3A"
-style_root = "fg:#747474 bg:#3A3A3A"
+style_user = "fg:#7fbbb3 bg:#3A515D"
+style_root = "fg:#7fbbb3 bg:#3A515D"
 format = '[$user ]($style)'
 disabled = false
 
 [directory]
-style = "fg:#DBDBDB bg:#4D4D4D"
+style = "fg:#DBBC7F bg:#4d4c43"
 format = "[ $path ]($style)"
 disabled = false
 
@@ -40,12 +40,12 @@ disabled = false
 
 [git_branch]
 symbol = ""
-style = "fg:#E6E6E6 bg:#515151"
+style = "fg:#E69875 bg:#514045"
 format = '[ $symbol $branch ]($style)'
 disabled = false
 
 [git_status]
-style = "fg:#E6E6E6 bg:#515151"
+style = "fg:#E69875 bg:#514045"
 format = '[$all_status$ahead_behind ]($style)'
 disabled = false
 
@@ -58,7 +58,7 @@ format = '[ $symbol ($version) ]($style)'
 disabled = false
 
 [kubernetes]
-style = "fg:#D3C6AA bg:#3A3A3A"
+style = "fg:#D3C6AA bg:#3A515D"
 format = '[ on ﴱ ($user on )($cluster in )$context \($namespace\) ]($style)'
 disabled = false
 
@@ -107,7 +107,7 @@ disabled = false
 
 [python]
 symbol = ''
-style = "fg:#DBDBDB bg:#4D4D4D"
+style = "fg:#DBBC7F bg:#4d4c43"
 format = '[(${symbol})]($style)'
 disabled = false
 
@@ -122,7 +122,7 @@ disabled = false
 [time]
 disabled = false
 time_format = "%R" # Hour:Minute Format
-style = "fg:#A7A7A7 bg:#424242"
+style = "fg:#A7C080 bg:#425047"
 format = '[ 󱑂 $time ]($style)'
 
 [cmd_duration]
