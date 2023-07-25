@@ -5,9 +5,11 @@ Linux Distribution : Arch Linux
 Desktop Environment : AwesomeWM<br/>
 Status Bar : Awesome Wibar<br/>
 Application Launcher: Rofi<br/>
+Dashboard: Eww<br/>
 
-Shell : Zsh<br/>
-Terminal : Kitty
+
+Shell : Bash<br/>
+Terminal : Kitty, WezTerm
 
 ## screenshots
 
