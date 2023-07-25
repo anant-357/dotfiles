@@ -9,7 +9,9 @@ theme.dir = os.getenv("HOME") .. "/.config/awesome/"
 theme.wallpaper = theme.dir .. "/wallpapers/monochrome-clouds.jpg"
 theme.colors = require("colorschemes.monochrome.main")
 theme.mode = theme.colors.dark
-theme.font = "Fira Code, Medium 11"
+
+-- theme.font = "Iosevka 11"
+theme.font = "Fira Code, Bold 11"
 theme.fg_normal = theme.mode.fg0
 theme.fg_focus = theme.mode.fg1
 theme.fg_urgent = "#fb4934"
@@ -39,7 +41,7 @@ theme.tooltip_font = "Fira Code, Medium 10"
 theme.tooltip_shape = wibar_widget_shape
 theme.tooltip_border_color = theme.mode.fg1
 theme.tooltip_border_width = dpi(3)
-theme.border_width = dpi(1.5)
+theme.border_width = dpi(0)
 theme.border_normal = theme.mode.fg1
 theme.border_focus = theme.mode.fg2
 theme.border_marked = "#CC9393"
@@ -135,6 +137,8 @@ theme.tasklist_bg_focus = theme.mode.bg
 theme.tasklist_fg_urgent = theme.mode.fg3
 theme.tasklist_bg_urgent = theme.mode.bg3
 theme.tasklist_spacing = dpi(5)
+
+theme.eww = 1
 
 theme.pacwall_conf = string.format([[
     hook: "hsetroot -solid '%s' -center '$W' > /dev/null"

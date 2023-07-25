@@ -17,6 +17,11 @@ local function timeicon_function(args)
         time_containerized = time
     end
 
+    time_containerized:buttons(awful.util.table.join(awful.button({}, 1, function()
+        awful.spawn.easy_async("sh /home/zinnia/.config/eww/dashboard/launch_dashboard", function()
+        end)
+    end)))
+
     local time_t = awful.tooltip {
         objects = {time_containerized},
         timer_function = function()

@@ -2,24 +2,68 @@ local gears = require("gears")
 local awful = require("awful")
 local backend = require("backend")
 local mytable = awful.util.table or gears.table -- 4.{0,1} compatibility
+local beautiful = require("beautiful")
 
 local modkey = "Mod4"
 local altkey = "Mod1"
-local terminal = "kitty"
+local terminal = "wezterm"
 local cycle_prev = true
 local browser = "firefox"
-
 local user = os.getenv("USER")
+
+local function toggle_statusbars()
+    for s in screen do
+        s.displaybar.visible = not s.displaybar.visible
+        if s.statusbar then
+            s.statusbar.visible = not s.statusbar.visible
+        end
+
+        if not s.displaybar.visible then
+            s.padding = {
+                top = 0,
+                bottom = 0,
+                left = 0,
+                right = 0
+            }
+        else
+            s.padding = {
+                top = -15,
+                bottom = 75,
+                left = 0,
+                right = 0
+            }
+        end
+
+    end
+end
 
 globalkeys = mytable.join( -- X screen locker
 awful.key({modkey}, "l", function()
+    toggle_statusbars()
     awful.spawn("sh /home/" .. user .. "/.config/awesome/lock.sh")
+    toggle_statusbars()
 end, {
     description = "lock screen",
     group = "hotkeys"
 }), awful.key({modkey, "Shift"}, "l", function()
+    toggle_statusbars()
     awful.spawn.easy_async("sh /home/" .. user .. "/.config/rofi/powermenu/powermenu.sh", function()
     end)
+    toggle_statusbars()
+
+end, {
+    description = "exit menu",
+    group = "hotkeys"
+}), awful.key({modkey, "Shift"}, "d", function()
+
+    if beautiful.eww > 1 then
+        os.execute("/sbin/eww --config /home/zinnia/.config/eww/dashboard kill")
+        beautiful.eww = beautiful.eww - 1
+    else
+        awful.spawn.easy_async("sh /home/zinnia/.config/eww/dashboard/launch_dashboard", function()
+        end)
+        beautiful.eww = beautiful.eww + 1
+    end
 end, {
     description = "exit menu",
     group = "hotkeys"
@@ -176,12 +220,12 @@ end, {
     description = "quit awesome",
     group = "awesome"
 }), awful.key({modkey, altkey}, "l", function()
-    awful.tag.incmwfact(0.05)
+    awful.tag.incmwfact(0.01)
 end, {
     description = "increase master width factor",
     group = "layout"
 }), awful.key({modkey, altkey}, "h", function()
-    awful.tag.incmwfact(-0.05)
+    awful.tag.incmwfact(-0.01)
 end, {
     description = "decrease master width factor",
     group = "layout"
@@ -338,6 +382,7 @@ end, {
                 right = 0
             }
         end
+
     end
 end, {
     description = "toggle wibox",

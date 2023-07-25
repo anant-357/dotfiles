@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-fg='5C6A72FF' 
-bg='FDF6E3FF'
+fg='EEEEEEFF' 
+bg='222222FF'
 i3lock \
     --color=000000FF \
     --screen 1		\
@@ -22,14 +22,14 @@ i3lock \
     --time-font='Fira Code, Medium' \
     --time-align=2 \
     --time-size=18 \
-    --time-pos="960:35" \
+    --time-pos="950:35" \
     --ind-pos="928:1028"    \
-    --date-color=$bg \
+    --date-color=$fg \
     --date-str='%d|%m|%y' \
-    --date-font='Fira Code, Medium' \
+    --date-font='Iosevka Semibold' \
     --date-align=1 \
-    --date-size=48 \
-    --date-pos="800:520" \
+    --date-size=96 \
+    --date-pos="730:520" \
     --verif-color=00000000 \
     --wrong-color=00000000 \
     --modif-color=00000000 \
