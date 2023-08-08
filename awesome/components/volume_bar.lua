@@ -40,7 +40,8 @@ local function factory(args)
 
     volume_bar_bar = wibox.widget {
         widget = wibox.widget.progressbar,
-        color = beautiful.foreground,
+        shape = gears.shape.rounded_bar,
+        color = beautiful.volume_bar_fg,
         background_color = beautiful.volume_bar_bg,
         max_value = 200,
         value = 0
@@ -51,7 +52,7 @@ local function factory(args)
         {
             layout = wibox.layout.align.horizontal,
             wibox.container.background(wibox.container.margin(volume_bar_bar, dpi(14), dpi(4), dpi(20), dpi(20)),
-                beautiful.background),
+                beautiful.volume_bar_real_bg),
             forced_width = 0.7 * offsetx
 
         },

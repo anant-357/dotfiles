@@ -11,7 +11,7 @@ local function factory(args)
     local timeout  = args.timeout or 2
     local settings = args.settings or function() end
 
-    local cmd      = "fuser -v /dev/video0 &> new.txt; cat new.txt"
+    local cmd      = "fuser -v /dev/video0"
 
     function webcam.update()
         helpers.async({ shell, "-c", cmd }, function(f)

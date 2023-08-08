@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-fg='EEEEEEFF' 
+fg='222222FF' 
 bg='222222FF'
+leaf='948946FF'
 i3lock \
-    --color=000000FF \
+    --color=FFFFFFFF \
     --screen 1		\
-    --blur 15		\
     --inside-color=$fg \
     --insidever-color=$fg \
     --insidewrong-color=$fg \
@@ -22,27 +22,33 @@ i3lock \
     --time-font='Fira Code, Medium' \
     --time-align=2 \
     --time-size=18 \
-    --time-pos="950:35" \
-    --ind-pos="928:1028"    \
+    --time-pos="954:35" \
+    --ind-pos="941:1028"    \
     --date-color=$fg \
     --date-str='%d|%m|%y' \
     --date-font='Iosevka Semibold' \
     --date-align=1 \
     --date-size=96 \
-    --date-pos="730:520" \
-    --verif-color=00000000 \
-    --wrong-color=00000000 \
-    --modif-color=00000000 \
-    --layout-color=00000000 \
-    --greeter-color=00000000 \
-    --verif-text='' \
-    --wrong-text='' \
-    --noinput-text='' \
-    --lock-text='password to pass' \
-    --lockfailed-text='' \
-    --greeter-text='password to pass' \
+    --date-pos="736:450" \
+    --wrong-color=$leaf \
+    --verif-color=$leaf \
+    --modif-color=$leaf \
+    --layout-color=$leaf \
+    --greeter-color=$leaf \
+    --verif-font='Symbols Nerd Font Mono' \
+    --wrong-font='Symbols Nerd Font Mono' \
+    --greeter-font='Symbols Nerd Font Mono' \
+    --greeter-pos="934:640"    \
+    --verif-text='󰞦' \
+    --wrong-text='󰞦' \
+    --lockfailed-text='󰞦' \
+    --greeter-text='󰞦' \
+    --verif-size=96 \
+    --wrong-size=96 \
+    --greeter-size=96 \
     --ignore-empty-password \
     --pass-media-keys \
     --pass-screen-keys \
     --indicator \
-    --clock
+    --clock \
+    --no-verify

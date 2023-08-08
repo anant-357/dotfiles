@@ -26,7 +26,7 @@ local brightness_adjust = wibox({
 
 local brightness_bar = wibox.widget {
     widget = wibox.widget.progressbar,
-    -- shape = gears.shape.rounded_bar,
+    shape = gears.shape.rounded_bar,
     color = beautiful.brightness_bar_fg,
     background_color = beautiful.brightness_bar_bg,
     max_value = 100,
@@ -64,35 +64,35 @@ awesome.connect_signal("brightness_change", function()
         brightness_bar.value = brightness_level
         if (brightness_level == nil) then
         elseif (brightness_level == 100) then
-            brightness_icon:set_markup_silently(format("<span foreground='%s'>   </span>", beautiful.foreground))
+            brightness_icon:set_markup_silently(markup.fg.color(beautiful.brightness_bar_fg, "  "))
         elseif (brightness_level > 90) then
-            brightness_icon:set_markup_silently(format("<span foreground='%s'>   </span>", beautiful.foreground))
+            brightness_icon:set_markup_silently(markup.fg.color(beautiful.brightness_bar_fg, "  "))
         elseif (brightness_level > 80) then
-            brightness_icon:set_markup_silently(format("<span foreground='%s'>   </span>", beautiful.foreground))
+            brightness_icon:set_markup_silently(markup.fg.color(beautiful.brightness_bar_fg, "  "))
         elseif (brightness_level > 70) then
-            brightness_icon:set_markup_silently(format("<span foreground='%s'>   </span>", beautiful.foreground))
+            brightness_icon:set_markup_silently(markup.fg.color(beautiful.brightness_bar_fg, "  "))
         elseif (brightness_level > 60) then
-            brightness_icon:set_markup_silently(format("<span foreground='%s'>   </span>", beautiful.foreground))
+            brightness_icon:set_markup_silently(markup.fg.color(beautiful.brightness_bar_fg, "  "))
         elseif (brightness_level > 50) then
-            brightness_icon:set_markup_silently(format("<span foreground='%s'>   </span>", beautiful.foreground))
+            brightness_icon:set_markup_silently(markup.fg.color(beautiful.brightness_bar_fg, "  "))
         elseif (brightness_level > 40) then
-            brightness_icon:set_markup_silently(format("<span foreground='%s'>   </span>", beautiful.foreground))
+            brightness_icon:set_markup_silently(markup.fg.color(beautiful.brightness_bar_fg, "  "))
         elseif (brightness_level > 30) then
-            brightness_icon:set_markup_silently(format("<span foreground='%s'>   </span>", beautiful.foreground))
+            brightness_icon:set_markup_silently(markup.fg.color(beautiful.brightness_bar_fg, "  "))
         elseif (brightness_level > 25) then
-            brightness_icon:set_markup_silently(format("<span foreground='%s'>   </span>", beautiful.foreground))
+            brightness_icon:set_markup_silently(markup.fg.color(beautiful.brightness_bar_fg, "  "))
         elseif (brightness_level > 20) then
-            brightness_icon:set_markup_silently(format("<span foreground='%s'>   </span>", beautiful.foreground))
+            brightness_icon:set_markup_silently(markup.fg.color(beautiful.brightness_bar_fg, "  "))
         elseif (brightness_level > 15) then
-            brightness_icon:set_markup_silently(format("<span foreground='%s'>   </span>", beautiful.foreground))
+            brightness_icon:set_markup_silently(markup.fg.color(beautiful.brightness_bar_fg, "  "))
         elseif (brightness_level > 10) then
-            brightness_icon:set_markup_silently(format("<span foreground='%s'>   </span>", beautiful.foreground))
+            brightness_icon:set_markup_silently(markup.fg.color(beautiful.brightness_bar_fg, "  "))
         elseif (brightness_level > 5) then
-            brightness_icon:set_markup_silently(format("<span foreground='%s'>   </span>", beautiful.foreground))
+            brightness_icon:set_markup_silently(markup.fg.color(beautiful.brightness_bar_fg, "  "))
         elseif (brightness_level > 0) then
-            brightness_icon:set_markup_silently(format("<span foreground='%s'>   </span>", beautiful.foreground))
+            brightness_icon:set_markup_silently(markup.fg.color(beautiful.brightness_bar_fg, "  "))
         else
-            brightness_icon:set_markup_silently(format("<span foreground='%s'>   </span>", beautiful.foreground))
+            brightness_icon:set_markup_silently(markup.fg.color(beautiful.brightness_bar_fg, "  "))
         end
     end, false)
 

@@ -34,6 +34,7 @@ local function baticon_function(args)
                 baticon:set_value(bat_now.perc)
 
                 if bat_now.ac_status == 1 then
+                    beautiful.discharge_flag = false
                     if tonumber(bat_now.perc) == 100 then
                         battext:set_markup_silently(markup.fg.color(beautiful.battery_fg, ' 󱐱'))
                         battext:set_font('Symbols Nerd Font Mono,10')
@@ -42,6 +43,32 @@ local function baticon_function(args)
                         battext:set_font('Symbols Nerd Font Mono ' .. tostring(font_size))
                     end
                 else
+                    if beautiful.discharge_flag == false then
+                        naughty.notify({
+                            fg = beautiful.foreground,
+                            bg = beautiful.background,
+                            title = "   󰂍 ",
+                            text = " Discharging ",
+                            border_width = 0
+                        })
+                        beautiful.discharge_flag = true
+                    end
+
+                    local critical_perc = 15
+
+                    if tonumber(bat_now.perc) <= critical_perc and beautiful.critical_battery_flag == false then
+                        naughty.notify({
+                            fg = beautiful.foreground,
+                            bg = beautiful.background,
+                            title = "   󱃍 ",
+                            text = " Battery level critical - " .. tostring(bat_now.perc) .. "% ",
+                            border_width = 0
+                        })
+                        beautiful.critical_battery_flag = true
+                    elseif tonumber(bat_now.perc) == critical_perc + 1 or tonumber(bat_now.perc) == critical_perc - 1 then
+                        beautiful.critical_battery_flag = false
+                    end
+
                     battext:set_markup_silently(markup.fg.color(beautiful.battery_fg, ' '))
                     battext:set_font('Symbols Nerd Font Mono 5')
                 end

@@ -4,6 +4,7 @@ local mytable = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 
 local modkey = "Mod4"
+local altkey = "Mod1"
 
 clientkeys   = mytable.join(
     awful.key({ modkey, }, "f",
@@ -12,7 +13,7 @@ clientkeys   = mytable.join(
             c:raise()
         end,
         { description = "toggle fullscreen", group = "client" }),
-    awful.key({ modkey, "Shift" }, "c", function(c) c:kill() end,
+    awful.key({ altkey }, "#70", function(c) c:kill() end,
         { description = "close", group = "client" }),
     awful.key({ modkey, }, "n",
         function(c)

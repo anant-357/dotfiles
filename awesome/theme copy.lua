@@ -17,25 +17,23 @@ theme.font = "Fira Code, Bold 11"
 theme.layout_floating = gears.color.recolor_image(theme.dir .. "assets/layout/floating.png", xrdb.foreground)
 theme.layout_tile = gears.color.recolor_image(theme.dir .. "assets/layout/tile.png", xrdb.foreground)
 
-theme.taglist_bg_normal = xrdb.color4
-theme.taglist_fg_normal = xrdb.foreground
-theme.taglist_fg_focus = xrdb.foreground
-theme.taglist_bg_focus = xrdb.color3
-theme.taglist_fg_urgent = xrdb.foreground
-theme.taglist_bg_urgent = xrdb.color6
-theme.taglist_fg_occupied = xrdb.foreground
-theme.taglist_bg_occupied = xrdb.color1
+theme.taglist_fg_focus = theme.mode.fg1
+theme.taglist_bg_focus = theme.mode.bg2
+theme.taglist_fg_urgent = theme.red or theme.mode.fg3
+theme.taglist_bg_urgent = theme.mode.bg3
+theme.taglist_fg_occupied = theme.mode.fg
+theme.taglist_bg_occupied = theme.mode.bg1
 theme.taglist_shape = gears.shape.circle
 theme.taglist_spacing = dpi(5)
 
 theme.tasklist_disable_icon = false
 theme.tasklist_disable_task_name = true
-theme.tasklist_fg_normal = xrdb.foreground
-theme.tasklist_bg_normal = xrdb.color1 .. "00"
-theme.tasklist_fg_focus = xrdb.foreground1
-theme.tasklist_bg_focus = xrdb.color1 .. "00"
-theme.tasklist_fg_urgent = xrdb.foreground3
-theme.tasklist_bg_urgent = xrdb.color1 .. "00 "
+theme.tasklist_fg_normal = theme.mode.fg
+theme.tasklist_bg_normal = theme.mode.bg2
+theme.tasklist_fg_focus = theme.mode.fg1
+theme.tasklist_bg_focus = theme.mode.bg
+theme.tasklist_fg_urgent = theme.mode.fg3
+theme.tasklist_bg_urgent = theme.mode.bg3
 theme.tasklist_spacing = dpi(5)
 
 theme.titlebar_close_button_normal = gears.color.recolor_image(theme.dir .. "assets/titlebar/close_1.png", theme.bg_alt)
@@ -57,7 +55,7 @@ theme.titlebar_maximized_button_focus_active = gears.color.recolor_image(theme.d
     theme.mode.dark_yellow)
 
 theme.fg_normal = xrdb.foreground
-theme.fg_focus = xrdb.color0
+theme.fg_focus = theme.mode.fg1
 theme.fg_urgent = "#fb4934"
 theme.useless_gap = dpi(15)
 
@@ -66,7 +64,7 @@ theme.bg_alt = theme.mode.bg1
 -- Colors
 theme.background = xrdb.background
 theme.background_alt = theme.mode.bg0_h
-theme.foreground = xrdb.foreground0
+theme.foreground = theme.mode.fg0
 theme.primary = theme.mode.dark_orange
 theme.secondary = theme.mode.dark_yellow
 theme.alert = theme.mode.dark_red
@@ -77,77 +75,73 @@ theme.notification_bg = theme.background
 theme.notification_fg = theme.foreground
 
 theme.tooltip_bg = theme.mode.bg
-theme.tooltip_fg = xrdb.foreground
+theme.tooltip_fg = theme.mode.fg
 theme.tooltip_font = "Fira Code, Medium 10"
 theme.tooltip_shape = wibar_widget_shape
 theme.tooltip_border_color = theme.mode.bg
 theme.tooltip_border_width = dpi(6)
 
 theme.border_width = dpi(0)
-theme.border_normal = xrdb.foreground1
-theme.border_focus = xrdb.foreground2
+theme.border_normal = theme.mode.fg1
+theme.border_focus = theme.mode.fg2
 theme.border_marked = "#CC9393"
 
 theme.user_image = theme.dir .. "assets/pfp.jpg"
 
-theme.status_bar_bg = "#00000000"
+theme.arch_icon_bg = theme.mode.dark_purple
+theme.arch_icon_fg = theme.mode.light_purple
 
-theme.display_bar_bg = xrdb.color1 .. "88"
-
-theme.arch_icon_bg = xrdb.color1 .. "66"
-theme.arch_icon_fg = xrdb.foreground
-
-theme.user_bg = xrdb.color1 .. "66"
+theme.user_bg = theme.mode.bg
 
 theme.mood_bg = theme.mode.bg
-theme.mood_fg = xrdb.foreground
+theme.mood_fg = theme.mode.fg
 theme.mood_index = 2
 
-theme.volume_bar_bg = xrdb.color1 .. "66"
-theme.volume_bar_real_bg = xrdb.color1 .. "66"
-theme.volume_bar_fg = xrdb.foreground
+theme.volume_bar_bg = theme.mode.bg
+theme.volume_bar_real_bg = theme.mode.bg
+theme.volume_bar_fg = theme.mode.fg
 
-theme.brightness_bar_bg = xrdb.color1 .. "66"
-theme.brightness_bar_real_bg = xrdb.color1 .. "66"
-theme.brightness_bar_fg = xrdb.foreground
+theme.brightness_bar_bg = theme.mode.bg
+theme.brightness_bar_real_bg = theme.mode.bg
+theme.brightness_bar_fg = theme.mode.fg
 
-theme.spotify_bg = xrdb.color1 .. "66"
-theme.spotify_fg = xrdb.foreground
+theme.spotify_bg = theme.mode.dark_green
+theme.spotify_fg = theme.mode.light_green
 
-theme.webcam_bg = xrdb.color1 .. "66"
-theme.volume_bg = xrdb.color1 .. "66"
-theme.microphone_bg = xrdb.color1 .. "66"
-theme.multimedia_bg = xrdb.color1 .. "66"
+theme.webcam_bg = theme.mode.dark_gray
+theme.volume_bg = theme.mode.dark_gray
+theme.microphone_bg = theme.mode.dark_gray
+theme.multimedia_bg = theme.mode.dark_yellow
 
-theme.ethernet_bg = xrdb.color1 .. "66"
-theme.wifi_bg = xrdb.color1 .. "66"
-theme.bluetooth_bg = xrdb.color1 .. "66"
-theme.future_bg = xrdb.color1 .. "66"
+theme.ethernet_bg = theme.mode.dark_gray
+theme.wifi_bg = theme.mode.dark_gray
+theme.bluetooth_bg = theme.mode.dark_blue
+theme.future_bg = theme.mode.dark_blue
 
-theme.rgb_keyboard_bg = xrdb.color1 .. "66"
-theme.battery_bg = xrdb.color1 .. "66"
-theme.battile_bg = xrdb.color1 .. "66"
+theme.rgb_keyboard_bg = theme.mode.dark_gray
+theme.battery_bg = theme.mode.dark_gray
+theme.battile_bg = theme.mode.dark_orange
 
-theme.time_bg = xrdb.color1 .. "66"
+theme.time_bg = theme.mode.dark_gray
 
-theme.leave_bg = xrdb.color1 .. "66"
+theme.leave_bg = theme.mode.dark_red
 
-theme.user_fg = xrdb.foreground
+theme.user_fg = theme.mode.fg
 
-theme.webcam_fg = xrdb.foreground
-theme.volume_fg = xrdb.foreground
-theme.microphone_fg = xrdb.foreground
+theme.webcam_fg = theme.mode.light_yellow
+theme.volume_fg = theme.mode.light_yellow
+theme.microphone_fg = theme.mode.light_yellow
 
-theme.ethernet_fg = xrdb.foreground
-theme.wifi_fg = xrdb.foreground
-theme.bluetooth_fg = xrdb.foreground
+theme.ethernet_fg = theme.mode.light_blue
+theme.wifi_fg = theme.mode.light_blue
+theme.bluetooth_fg = theme.mode.light_blue
 
-theme.rgb_keyboard_fg = xrdb.foreground
-theme.battery_fg = xrdb.foreground
+theme.rgb_keyboard_fg = theme.mode.light_orange
+theme.battery_fg = theme.mode.light_orange
 
-theme.time_fg = xrdb.foreground
+theme.time_fg = theme.mode.fg
 
-theme.leave_fg = xrdb.foreground
+theme.leave_fg = theme.mode.light_red
 
 theme.eww_dashboard = false
 theme.discharge_flag = false
@@ -183,7 +177,7 @@ return theme
 
 -- ]], theme.mode.bg, theme.mode.bg, theme.mode.light_yellow, theme.mode.light_blue, theme.mode.light_yellow,
 --     theme.mode.light_yellow, theme.mode.light_orange, theme.mode.light_orange, theme.mode.light_pink,
---     theme.mode.light_pink, theme.mode.light_green, xrdb.foreground)
+--     theme.mode.light_pink, theme.mode.light_green, theme.mode.fg)
 
 -- local file = io.open("/home/zinnia/.config/pacwall/pacwall.conf", 'w+')
 -- if file then

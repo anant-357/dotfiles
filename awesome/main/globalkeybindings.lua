@@ -2,6 +2,7 @@ local gears = require("gears")
 local awful = require("awful")
 local backend = require("backend")
 local mytable = awful.util.table or gears.table -- 4.{0,1} compatibility
+local shell = require("awful.util").shell
 local beautiful = require("beautiful")
 
 local modkey = "Mod4"
@@ -10,6 +11,7 @@ local terminal = "wezterm"
 local cycle_prev = true
 local browser = "firefox"
 local user = os.getenv("USER")
+local helpers = require("backend.helpers")
 
 local function toggle_statusbars()
     for s in screen do
@@ -54,15 +56,13 @@ end, {
 end, {
     description = "exit menu",
     group = "hotkeys"
-}), awful.key({modkey, "Shift"}, "d", function()
-
-    if beautiful.eww > 1 then
+}), awful.key({modkey, "Shift"}, "x", function()
+    if beautiful.eww_dashboard == true then
         os.execute("/sbin/eww --config /home/zinnia/.config/eww/dashboard kill")
-        beautiful.eww = beautiful.eww - 1
+        awesome.emit_signal("toggle_dashboard")
     else
         awful.spawn.easy_async("sh /home/zinnia/.config/eww/dashboard/launch_dashboard", function()
         end)
-        beautiful.eww = beautiful.eww + 1
     end
 end, {
     description = "exit menu",
@@ -226,6 +226,16 @@ end, {
     group = "layout"
 }), awful.key({modkey, altkey}, "h", function()
     awful.tag.incmwfact(-0.01)
+end, {
+    description = "decrease master width factor",
+    group = "layout"
+}), awful.key({modkey, altkey}, "j", function()
+    awful.tag.incmhfact(0.01)
+end, {
+    description = "increase master width factor",
+    group = "layout"
+}), awful.key({modkey, altkey}, "k", function()
+    awful.tag.incmhfact(-0.01)
 end, {
     description = "decrease master width factor",
     group = "layout"

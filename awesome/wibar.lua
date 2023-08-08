@@ -155,8 +155,7 @@ s.mylayoutbox = awful.widget.layoutbox(s)
 
 s.statusbar = awful.wibox({
     screen = s,
-    bg = "#00000000",
-    -- beautiful.background,
+    bg = beautiful.status_bar_bg,
     fg = beautiful.foreground,
 
     width = dpi(1900),
@@ -168,7 +167,7 @@ s.statusbar = awful.wibox({
 
 s.displaybar = awful.wibox({
     screen = s,
-    bg = beautiful.background,
+    bg = beautiful.display_bar_bg,
     fg = beautiful.foreground,
     type = "notification",
     width = dpi(1900),
