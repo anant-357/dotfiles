@@ -8,9 +8,11 @@
   // background-image: url("images/bg.jpg");
   // background-size: 1920px 1080px;
   // background-color: #222222;
+  // background-color: transparent;
   background-color: #eeeeee;
+
   // filter: blur(4px);
-  opacity: 0.9;
+  opacity: 1;
 }
 
 .genwin {
@@ -20,6 +22,8 @@
 
 .face {
   margin: 65px 0px 0px 0px;
+  // color: #948946;
+  color: #ffffff;
   font-size: 96px;
 }
 
@@ -126,8 +130,8 @@ scale trough highlight {
 
 .uphour {
   color: #bfbfbf;
-  font-size: 42px;
-  font-weight: bold;
+  font-size: 64px;
+  font-weight: 900;
 }
 
 .upmin {
@@ -137,15 +141,16 @@ scale trough highlight {
 }
 
 .album_art {
-  background-size: 240px;
-  min-height: 240px;
-  min-width: 240px;
-  margin: 20px;
+  background-size: 100%;
+  min-height: 140px;
+  min-width: 140px;
+  background-repeat: no-repeat;
+  margin: 40px 0px 0px 40px;
   border-radius: 14px;
 }
 
 .song {
-  color: #bfbfbf;
+  color: #fff;
   font-size: 24px;
   font-weight: bold;
   margin: 40px 0px 0px 0px;

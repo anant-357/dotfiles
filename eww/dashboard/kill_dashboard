@@ -1,0 +1,3 @@
+#!/bin/bash
+/sbin/eww --config /home/zinnia/.config/eww/dashboard kill
+awesome-client 'awesome.emit_signal("toggle_dashboard")'

@@ -16,3 +16,4 @@ eww --config $HOME/.config/eww/dashboard open-many \
 	sleep \
 	reboot \
 	poweroff 
+awesome-client 'awesome.emit_signal("toggle_dashboard")'
