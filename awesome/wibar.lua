@@ -20,7 +20,7 @@ local arch_icon = components.arch_ico({
 
 -- Clock
 local time = components.time_ico({
-    container = "no"
+    container = "yes"
 })
 
 -- Spotify
@@ -157,11 +157,10 @@ s.statusbar = awful.wibox({
     screen = s,
     bg = beautiful.status_bar_bg,
     fg = beautiful.foreground,
-
     width = dpi(1900),
     height = dpi(60),
     visible = true,
-    type = "notification"
+    type = "dock"
 
 })
 
@@ -169,7 +168,8 @@ s.displaybar = awful.wibox({
     screen = s,
     bg = beautiful.display_bar_bg,
     fg = beautiful.foreground,
-    type = "notification",
+    shape = gears.shape.rounded_bar,
+    type = "dock",
     width = dpi(1900),
     height = dpi(35),
     visible = true

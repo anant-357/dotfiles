@@ -55,6 +55,7 @@ local function volicon_function(args)
 
     local volume_t = awful.tooltip {
         objects = {volicon},
+        margins = 10,
         timer_function = function()
             return string.format("Volume: %s&#37;", volume_status.left)
         end

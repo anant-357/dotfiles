@@ -41,29 +41,18 @@ end
 
 globalkeys = mytable.join( -- X screen locker
 awful.key({modkey}, "l", function()
-    toggle_statusbars()
     awful.spawn("sh /home/" .. user .. "/.config/awesome/lock.sh")
-    toggle_statusbars()
 end, {
     description = "lock screen",
     group = "hotkeys"
 }), awful.key({modkey, "Shift"}, "l", function()
-    toggle_statusbars()
-    awful.spawn.easy_async("sh /home/" .. user .. "/.config/rofi/powermenu/powermenu.sh", function()
+    awful.spawn.easy_async("eww open powermenu", function()
     end)
-    toggle_statusbars()
-
 end, {
     description = "exit menu",
     group = "hotkeys"
 }), awful.key({modkey, "Shift"}, "x", function()
-    if beautiful.eww_dashboard == true then
-        os.execute("/sbin/eww --config /home/zinnia/.config/eww/dashboard kill")
-        awesome.emit_signal("toggle_dashboard")
-    else
-        awful.spawn.easy_async("sh /home/zinnia/.config/eww/dashboard/launch_dashboard", function()
-        end)
-    end
+    os.execute("eww open dashboard")
 end, {
     description = "exit menu",
     group = "hotkeys"
@@ -357,43 +346,14 @@ end, {
     description = "run rofi desktop applications",
     group = "launcher"
 }), awful.key({modkey, "Shift"}, "s", function()
-    awful.spawn.easy_async_with_shell("sh /home/" .. user .. "/dotfiles/awesome/screenshot_selection.sh", function()
-
-    end)
-end, {
-    description = "capture selection screenshot",
-    group = "launcher"
-}), awful.key({modkey, "Shift"}, "#107", function()
-    awful.spawn.easy_async_with_shell("sh /home/" .. user .. "/dotfiles/awesome/screenshot_screen.sh", function()
+    awful.spawn.easy_async_with_shell("eww open screenshotmenu", function()
 
     end)
 end, {
     description = "capture selection screenshot",
     group = "launcher"
 }), awful.key({modkey, "Shift"}, "b", function()
-    for s in screen do
-        s.displaybar.visible = not s.displaybar.visible
-        if s.statusbar then
-            s.statusbar.visible = not s.statusbar.visible
-        end
-
-        if not s.displaybar.visible then
-            s.padding = {
-                top = 0,
-                bottom = 0,
-                left = 0,
-                right = 0
-            }
-        else
-            s.padding = {
-                top = -15,
-                bottom = 75,
-                left = 0,
-                right = 0
-            }
-        end
-
-    end
+    awesome.emit_signal("toggle_wibar")
 end, {
     description = "toggle wibox",
     group = "awesome"

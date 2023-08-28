@@ -11,6 +11,7 @@ end)))
 
 local add_tag_t = awful.tooltip {
     objects = {add_tag},
+    margins = 10,
     timer_function = function()
         return "Add new tag"
     end

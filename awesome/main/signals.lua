@@ -7,6 +7,7 @@ client.connect_signal("manage", function(c)
     -- Set the windows at the slave,
     -- i.e. put it at the end of others instead of setting it master.
     -- if not awesome.startup then awful.client.setslave(c) end
+    -- c.shape = gears.shape.rounded_rect
 
     if awesome.startup and not c.size_hints.user_position and not c.size_hints.program_position then
         -- Prevent clients from being unreachable after screen count changes.
@@ -16,6 +17,31 @@ end)
 
 awesome.connect_signal("toggle_dashboard", function()
     beautiful.eww_dashboard = not beautiful.eww_dashboard
+end)
+
+awesome.connect_signal("toggle_wibar", function()
+    for s in screen do
+        s.displaybar.visible = not s.displaybar.visible
+        if s.statusbar then
+            s.statusbar.visible = not s.statusbar.visible
+        end
+
+        if not s.displaybar.visible then
+            s.padding = {
+                top = 0,
+                bottom = 0,
+                left = 0,
+                right = 0
+            }
+        else
+            s.padding = {
+                top = -15,
+                bottom = 75,
+                left = 0,
+                right = 0
+            }
+        end
+    end
 end)
 
 -- Enable sloppy focus, so that focus follows mouse.

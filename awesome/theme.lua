@@ -13,9 +13,15 @@ local xrdb = require("beautiful.xresources").get_current_theme()
 
 -- theme.font = "Iosevka 11"
 theme.font = "Fira Code, Bold 11"
-
+Label, ListView, NoSelection, PolicyType, ScrolledWindow,
+    SignalListItemFactory, StringList, StringObject, Widget,
 theme.layout_floating = gears.color.recolor_image(theme.dir .. "assets/layout/floating.png", xrdb.foreground)
 theme.layout_tile = gears.color.recolor_image(theme.dir .. "assets/layout/tile.png", xrdb.foreground)
+
+-- theme.border_width = dpi(4)
+-- theme.border_focus = xrdb.color7
+-- theme.border_normal = xrdb.color8
+-- theme.border_focus = xrdb.color0
 
 theme.taglist_bg_normal = xrdb.color4
 theme.taglist_fg_normal = xrdb.foreground
@@ -25,7 +31,7 @@ theme.taglist_fg_urgent = xrdb.foreground
 theme.taglist_bg_urgent = xrdb.color6
 theme.taglist_fg_occupied = xrdb.foreground
 theme.taglist_bg_occupied = xrdb.color1
-theme.taglist_shape = gears.shape.circle
+theme.taglist_shape = gears.shape.rounded_rect
 theme.taglist_spacing = dpi(5)
 
 theme.tasklist_disable_icon = false
@@ -66,33 +72,30 @@ theme.bg_alt = theme.mode.bg1
 -- Colors
 theme.background = xrdb.background
 theme.background_alt = theme.mode.bg0_h
-theme.foreground = xrdb.foreground0
+theme.foreground = xrdb.foreground
 theme.primary = theme.mode.dark_orange
 theme.secondary = theme.mode.dark_yellow
 theme.alert = theme.mode.dark_red
 theme.disabled = theme.mode.dark_gray
 theme.red = "#ee4040"
 
-theme.notification_bg = theme.background
-theme.notification_fg = theme.foreground
+theme.notification_bg = xrdb.background
+theme.notification_fg = xrdb.foreground
+theme.notification_shape = gears.shape.rounded_rect
 
-theme.tooltip_bg = theme.mode.bg
+theme.tooltip_bg = xrdb.background
 theme.tooltip_fg = xrdb.foreground
 theme.tooltip_font = "Fira Code, Medium 10"
-theme.tooltip_shape = wibar_widget_shape
-theme.tooltip_border_color = theme.mode.bg
+theme.tooltip_shape = gears.shape.rounded_rect
+theme.tooltip_border_color = xrdb.background
 theme.tooltip_border_width = dpi(6)
-
-theme.border_width = dpi(0)
-theme.border_normal = xrdb.foreground1
-theme.border_focus = xrdb.foreground2
-theme.border_marked = "#CC9393"
 
 theme.user_image = theme.dir .. "assets/pfp.jpg"
 
 theme.status_bar_bg = "#00000000"
 
-theme.display_bar_bg = xrdb.color1 .. "88"
+theme.display_bar_bg = "#00000000"
+-- xrdb.color1 .. "88"
 
 theme.arch_icon_bg = xrdb.color1 .. "66"
 theme.arch_icon_fg = xrdb.foreground

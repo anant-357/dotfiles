@@ -49,7 +49,8 @@ local function neticon_function(args)
 
     local net_t = awful.tooltip {
         objects = {neticon},
-        timer_function = function()
+    margins = 10,
+    timer_function = function()
             -- local ret
             if net_status.state == "down" then
                 return "Wifi Off"

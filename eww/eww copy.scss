@@ -1,0 +1,261 @@
+@import "/home/zinnia/.cache/wal/colors.scss";
+* {
+  all: unset;
+  font-family: feather;
+  font-family: Iosevka;
+}
+
+.bg {
+  // background-image: url("images/bg.jpg");
+  // background-size: 1920px 1080px;
+  // background-color: #222222;
+  // background-color: transparent;
+  // backdrop-filter: blur(5px);
+  background-color: $foreground;
+
+  // filter: blur(4px);
+  opacity: 0.1;
+}
+
+.genwin {
+  border-radius: 16px;
+  background-color: $background;
+  // background-blend-mode: 0.6;
+}
+
+.face {
+  margin: 65px 0px 0px 0px;
+  // color: #948946;
+  color: $foreground;
+  font-size: 96px;
+}
+
+.fullname {
+  font-size: 30px;
+  color: $color3;
+  margin: 15px 0px 0px 0px;
+  font-weight: bold;
+}
+
+.username {
+  font-size: 22px;
+  color: #8f8f8f;
+  margin: 10px 0px 0px 0px;
+  font-weight: bold;
+}
+
+.iconcpu,
+.iconmem,
+.iconbright,
+.iconbat {
+  font-size: 32px;
+  font-weight: normal;
+}
+.iconcpu {
+  color: $foreground;
+}
+.iconmem {
+  color: $foreground;
+}
+.iconbright {
+  color: $foreground;
+}
+.iconbat {
+  color: $foreground;
+}
+
+.cpu_bar,
+.mem_bar,
+.bright_bar,
+.bat_bar,
+scale trough {
+  all: unset;
+  background-color: #3a404c;
+  border-radius: 16px;
+  min-height: 28px;
+  min-width: 240px;
+}
+
+.cpu_bar,
+.mem_bar,
+.bright_bar,
+.bat_bar,
+scale trough highlight {
+  all: unset;
+  border-radius: 16px;
+}
+
+.cpu_bar scale trough highlight {
+  background-color: $foreground;
+}
+.mem_bar scale trough highlight {
+  background-color: $foreground;
+}
+.bright_bar scale trough highlight {
+  background-color: $foreground;
+}
+.bat_bar scale trough highlight {
+  background-color: $foreground;
+}
+
+.time_hour,
+.time_min {
+  color: $foreground;
+  font-size: 70px;
+  font-weight: bold;
+}
+.time_hour {
+  margin: 15px 0px 0px 20px;
+}
+.time_min {
+  margin: 0px 0px 10px 0px;
+}
+
+.time_mer {
+  color: $foreground;
+  font-size: 40px;
+  font-weight: bold;
+  margin: 20px 0px 0px -20px;
+}
+
+.time_day {
+  color: $foreground;
+  font-size: 30px;
+  font-weight: normal;
+  margin: 0px 0px 20px 40px;
+}
+
+.icontimer {
+  color: $foreground;
+  font-size: 90px;
+  font-weight: normal;
+}
+
+.uphour {
+  color: $foreground;
+  font-size: 64px;
+  font-weight: 900;
+}
+
+.upmin {
+  color: $foreground;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.album_art {
+  background-size: 100%;
+  min-height: 140px;
+  min-width: 140px;
+  background-repeat: no-repeat;
+  margin: 40px 0px 0px 40px;
+  border-radius: 14px;
+}
+
+.song {
+  color: $foreground;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 40px 0px 0px 0px;
+}
+
+.artist {
+  color: $foreground;
+  font-size: 16px;
+  font-weight: normal;
+  margin: 0px 0px 15px 0px;
+}
+
+.btn_prev,
+.btn_play,
+.btn_next {
+  font-family: Iosevka;
+}
+.btn_prev {
+  color: $foreground;
+  font-size: 32px;
+  font-weight: normal;
+}
+.btn_play {
+  color: $foreground;
+  font-size: 48px;
+  font-weight: bold;
+}
+.btn_next {
+  color: $foreground;
+  font-size: 32px;
+  font-weight: normal;
+}
+
+.music_bar scale trough highlight {
+  all: unset;
+  background-color: $foreground;
+  border-radius: 8px;
+}
+.music_bar scale trough {
+  all: unset;
+  background-color: #3a404c;
+  border-radius: 8px;
+  min-height: 20px;
+  min-width: 310px;
+}
+
+.iconweather {
+  font-family: Iosevka;
+  font-size: 120px;
+  font-weight: normal;
+  color: $color2;
+}
+
+.label_temp {
+  color: $foreground;
+  font-size: 80px;
+  font-weight: bold;
+}
+
+.label_stat {
+  color: $foreground;
+  font-size: 38px;
+  font-weight: bold;
+}
+
+.label_quote {
+  color: $foreground;
+  font-size: 18px;
+  font-weight: normal;
+}
+
+.close {
+  background-color: $foreground;
+  border-radius: 16px;
+}
+
+.close_text {
+  color: #2e3440;
+  font-size: 40px;
+}
+.close_button {
+  padding: 2em;
+}
+
+/** Power buttons ***************************************/
+.btn_logout,
+.btn_sleep,
+.btn_reboot,
+.btn_poweroff {
+  font-size: 48px;
+  font-weight: bold;
+}
+
+.btn_logout {
+  color: $foreground;
+}
+.btn_sleep {
+  color: $foreground;
+}
+.btn_reboot {
+  color: $foreground;
+}
+.btn_poweroff {
+  color: $foreground;
+}

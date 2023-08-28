@@ -44,7 +44,8 @@ local function bluetooth_icon_function(args)
 
     local bluetooth_t = awful.tooltip {
         objects = {bluetooth_icon},
-        timer_function = function()
+    margins = 10,
+    timer_function = function()
             if bluetooth_status.status == "off" then
                 return "Bluetooth Off"
             end

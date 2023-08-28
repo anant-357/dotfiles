@@ -82,7 +82,8 @@ local function baticon_function(args)
 
     local battery_t = awful.tooltip {
         objects = {baticon},
-        timer_function = function()
+    margins = 10,
+    timer_function = function()
             return string.format("%s %s&#37;\n", bat_status.status, bat_status.perc) .. bat_status.time .. " left"
         end
     }

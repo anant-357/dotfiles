@@ -73,6 +73,7 @@ end)))
 
 local spotify_t = awful.tooltip {
     objects = {spotify_icon},
+    margins = 10,
     timer_function = function()
         if spot_t_now.status == "off" then
             return "Spotify not running"
@@ -84,6 +85,7 @@ local spotify_t = awful.tooltip {
 
 local spotify_next_song_t = awful.tooltip {
     objects = {spotify_next_song_icon},
+    margins = 10,
     timer_function = function()
         if spot_t_now.status == "off" then
             return "Spotify not running"
@@ -94,6 +96,7 @@ local spotify_next_song_t = awful.tooltip {
 
 local spotify_prev_song_t = awful.tooltip {
     objects = {spotify_prev_song_icon},
+    margins = 10,
     timer_function = function()
         if spot_t_now.status == "off" then
             return "Spotify not running"

@@ -14,8 +14,8 @@ local xrdb = require("beautiful.xresources").get_current_theme()
 -- theme.font = "Iosevka 11"
 theme.font = "Fira Code, Bold 11"
 
-theme.layout_floating = gears.color.recolor_image(theme.dir .. "assets/layout/floating.png", xrdb.foreground)
-theme.layout_tile = gears.color.recolor_image(theme.dir .. "assets/layout/tile.png", xrdb.foreground)
+theme.layout_floating = gears.color.recolor_image(theme.dir .. "assets/layout/floating.png", theme.mode.light_orange)
+theme.layout_tile = gears.color.recolor_image(theme.dir .. "assets/layout/tile.png", theme.mode.light_orange)
 
 theme.taglist_fg_focus = theme.mode.fg1
 theme.taglist_bg_focus = theme.mode.bg2
@@ -77,7 +77,7 @@ theme.notification_fg = theme.foreground
 theme.tooltip_bg = theme.mode.bg
 theme.tooltip_fg = theme.mode.fg
 theme.tooltip_font = "Fira Code, Medium 10"
-theme.tooltip_shape = wibar_widget_shape
+theme.tooltip_shape = gears.shape.rounded_rect
 theme.tooltip_border_color = theme.mode.bg
 theme.tooltip_border_width = dpi(6)
 

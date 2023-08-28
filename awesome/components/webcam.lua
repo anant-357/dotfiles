@@ -40,7 +40,8 @@ local function webcam_function(args)
 
     local webcam_t = awful.tooltip {
         objects = {webcam_icon},
-        timer_function = function()
+    margins = 10,
+    timer_function = function()
             if webcam_status.status == "off" then
                 return "Webcam Off"
             end

@@ -21,7 +21,9 @@ local brightness_adjust = wibox({
     width = offsetx,
     visible = false,
     ontop = true,
-    type = "desktop"
+    type = "desktop",
+    shape = gears.shape.rounded_bar
+
 })
 
 local brightness_bar = wibox.widget {

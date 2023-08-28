@@ -21,7 +21,8 @@ local function rgb_keyboard_icon(args)
     end)))
     local rgb_keyboard_icon_t = awful.tooltip {
         objects = {rgb_keyboard_icon},
-        timer_function = function()
+    margins = 10,
+    timer_function = function()
             return "RGB keyboard settings"
         end
     }

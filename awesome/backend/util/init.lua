@@ -172,4 +172,11 @@ function util.useless_gaps_resize(thatmuch, s, t)
     awful.layout.arrange(scr)
 end
 
+function util.border_toggle(s, t)
+    local scr = s or awful.screen.focused()
+    local tag = t or scr.selected_tag
+    tag.gap = tag.gap + tonumber(thatmuch)
+    awful.layout.arrange(scr)
+end
+
 return setmetatable(util, { __index = wrequire })

@@ -35,7 +35,9 @@ local function factory(args)
         width = offsetx,
         visible = false,
         ontop = true,
-        type = "desktop"
+        type = "desktop",
+        shape = gears.shape.rounded_bar
+
     })
 
     volume_bar_bar = wibox.widget {

@@ -1,0 +1,242 @@
+@import "/home/zinnia/.cache/wal/colors.scss";
+* {
+  all: unset;
+}
+
+.layout-grid {
+  padding: 2em 4em;
+  font-family: Iosevka, "Symbols Nerd Font Mono", feather;
+}
+
+.widget {
+  background-color: $background;
+  border-radius: 16px;
+  padding: 1em;
+  border: 2px solid #555555;
+}
+
+.screenshot {
+  padding: 0;
+}
+
+.welcome {
+  font-size: 48px;
+  font-weight: 900;
+}
+
+.profile {
+  padding: 1.5em 0;
+}
+
+.profile-photo {
+  font-size: 96px;
+  margin: 0 1.1em;
+}
+
+.fullname {
+  font-size: 30px;
+  color: $color3;
+  font-weight: bold;
+  margin: 1em 0;
+}
+
+.username {
+  font-size: 22px;
+  color: #8f8f8f;
+  font-weight: bold;
+}
+
+.time {
+  color: $foreground;
+  font-size: 72px;
+  font-weight: 900;
+}
+
+.day {
+  color: #fff;
+  font-size: 36px;
+  font-weight: 300;
+}
+
+.music-box {
+  margin: 1em 1em 1em 1em;
+}
+
+.music {
+  margin: 0em 1em 0em 2.5em;
+}
+
+.song {
+  color: $foreground;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.artist {
+  color: $foreground;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.btn_prev {
+  color: $foreground;
+  font-size: 32px;
+  font-weight: normal;
+}
+.btn_play {
+  color: $foreground;
+  font-size: 48px;
+  font-weight: normal;
+}
+.btn_next {
+  color: $foreground;
+  font-size: 32px;
+  font-weight: normal;
+}
+
+.music_bar scale trough highlight {
+  background-color: $foreground;
+  border-radius: 8px;
+}
+.music_bar scale trough {
+  background-color: #3a404c;
+  border-radius: 8px;
+  min-height: 20px;
+  min-width: 310px;
+}
+
+.cover {
+  border-radius: 60px;
+  padding: 1em;
+}
+
+.weather {
+  padding: 2em;
+}
+
+.location_icon {
+  color: $foreground;
+  font-size: 24px;
+}
+
+.location {
+  font-size: 24px;
+}
+
+.weather_icon {
+  font-size: 96px;
+}
+
+.temperature {
+  font-size: 48px;
+  font-weight: 700;
+}
+
+.stat {
+  font-size: 38px;
+  font-weight: 800;
+}
+
+.quote {
+  font-size: 26px;
+}
+
+.app {
+  background-repeat: no-repeat;
+  background-size: 64px;
+  min-height: 64px;
+  min-width: 64px;
+  margin: 8px 8px 0px 8px;
+}
+
+.app {
+  font-size: 42px;
+  color: $foreground;
+}
+
+// .firefox {
+//   color: #ff9500;
+// }
+
+// .discord {
+//   color: #5865f2;
+// }
+
+// .spotify {
+//   color: #1db954;
+// }
+
+// .folder {
+//   color: yellow;
+// }
+
+// .terminal{
+//   color: gray;
+// }
+
+// .mail{
+//   color: red;
+// }
+
+.apps {
+  padding: 1em;
+}
+
+.mem_bar,
+.bright_bar,
+.bat_bar,
+scale trough highlight {
+  all: unset;
+  border-radius: 8px;
+  background-color: $foreground;
+}
+
+.cpu_bar,
+.mem_bar,
+.bright_bar,
+.bat_bar,
+scale trough {
+  all: unset;
+  background-color: grey;
+  border-radius: 8px;
+  min-width: 20px;
+  min-height: 260px;
+}
+
+.cpu_icon {
+  font-size: 42px;
+  margin: 0;
+  padding: 0;
+}
+
+.system {
+  padding: 1.4em;
+}
+
+.back {
+  padding: 0;
+  border-radius: 16px;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  min-height: 400px;
+}
+
+.cpu_bar,
+.close,
+.logout,
+.sleep,
+.poweroff,
+.reboot,
+.selection,
+.fullscreen,
+.windowshot {
+  background-color: $background;
+  color: $foreground;
+  border-radius: 16px;
+  padding: 0.8em;
+  font-size: 36px;
+}
+
+.screenshotmenu-box {
+  padding-top: 2.5em;
+}

@@ -22,7 +22,8 @@ local function leaveicon_function(args)
 
     local leave_t = awful.tooltip {
         objects = {leave_icon},
-        timer_function = function()
+    margins = 10,
+    timer_function = function()
             return "Exit Menu"
         end
     }

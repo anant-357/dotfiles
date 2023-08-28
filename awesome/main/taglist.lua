@@ -9,7 +9,7 @@ function subscript(text)
     return markup.font("Fira Code, Medium 5", text)
 end
 
-awful.util.tagnames = {"    " -- .. subscript(1)
+awful.util.tagnames = {"", "    " -- .. subscript(1)
 , "  󰈹  " -- .. subscript(2)
 , "    " -- .. subscript(3)
 , "    " -- .. subscript(4)

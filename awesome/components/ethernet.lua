@@ -37,7 +37,8 @@ local function neticon_function(args)
 
     local net_t = awful.tooltip {
         objects = {neticon},
-        timer_function = function()
+    margins = 10,
+    timer_function = function()
             if net_status.carrier == "0" then
                 return "Not Connected"
             end

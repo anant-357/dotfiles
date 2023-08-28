@@ -17,7 +17,6 @@ require("main.wallpaper")
 
 require("main.notifications")
 
-require("main.mouse")
 
 require("main.globalkeybindings")
 

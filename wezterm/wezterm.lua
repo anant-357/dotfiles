@@ -5,7 +5,7 @@ local function font_with_fallback(name, params)
     return wezterm.font_with_fallback(names, params)
 end
 
-local font_name = "Iosevka Semibold"
+local font_name = "Fira Code SemiBold"
 
 return {
     front_end = "OpenGL",
@@ -33,6 +33,7 @@ return {
     warn_about_missing_glyphs = false,
     font_size = 11,
     line_height = 1.0,
+    harfbuzz_features = {"zero", "ss01", "cv05"},
 
     -- Cursor style
     default_cursor_style = "BlinkingUnderline",
@@ -133,7 +134,7 @@ return {
             ActivateTabRelative = -1
         })
     }, -- standard copy/paste bindings
-     {
+    {
         key = "v",
         mods = "CTRL|SHIFT",
         action = wezterm.action({
@@ -171,7 +172,8 @@ return {
         saturation = 1.0,
         brightness = 1.0
     },
-    window_background_opacity = 1.0,
+    window_background_opacity = 0.3,
+    macos_window_background_blur = 2,
     window_close_confirmation = "NeverPrompt",
     window_frame = {
         active_titlebar_bg = "#090909",

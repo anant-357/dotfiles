@@ -1,0 +1,67 @@
+#!/bin/bash
+
+PREV_TOTAL=0
+PREV_IDLE=0
+cpuFile="/tmp/.cpu_usage"
+
+cpu() {
+	if [[ -f "${cpuFile}" ]]; then
+		fileCont=$(cat "${cpuFile}")
+		PREV_TOTAL=$(echo "${fileCont}" | head -n 1)
+		PREV_IDLE=$(echo "${fileCont}" | tail -n 1)
+	fi
+
+	CPU=(`cat /proc/stat | grep '^cpu '`) 
+	unset CPU[0]                          
+	IDLE=${CPU[4]}                        
+
+	TOTAL=0
+
+	for VALUE in "${CPU[@]:0:4}"; do
+		let "TOTAL=$TOTAL+$VALUE"
+	done
+
+	if [[ "${PREV_TOTAL}" != "" ]] && [[ "${PREV_IDLE}" != "" ]]; then
+		let "DIFF_IDLE=$IDLE-$PREV_IDLE"
+		let "DIFF_TOTAL=$TOTAL-$PREV_TOTAL"
+		let "DIFF_USAGE=(1000*($DIFF_TOTAL-$DIFF_IDLE)/$DIFF_TOTAL+5)/10"
+		
+		echo $((DIFF_USAGE))
+	else
+		echo "?"
+	fi
+
+	echo "${TOTAL}" > "${cpuFile}"
+	echo "${IDLE}" >> "${cpuFile}"
+}
+
+memory() {
+	printf "%.0f\n" $(free -m | grep Mem | awk '{print ($3/$2)*100}')
+}
+
+brightness() {
+	light
+}
+
+battery() {
+	BAT=`ls /sys/class/power_supply | grep BAT | head -n 1`
+	cat /sys/class/power_supply/${BAT}/capacity
+}
+
+volume() {
+	SINK=`pactl list sinks | grep -Po "Name:\s*\K(.*)" | tail -n 1`
+	cat 
+
+}
+
+if [[ "$1" == "cpu" ]]; then
+	cpu
+elif [[ "$1" == "memory" ]]; then
+	memory
+elif [[ "$1" == "brightness" ]]; then
+	brightness
+elif [[ "$1" == "battery" ]]; then
+	battery
+elif [[ "$1" == "volume" ]]; then
+	volume
+fi

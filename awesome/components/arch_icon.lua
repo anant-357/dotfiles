@@ -22,7 +22,8 @@ local function arch_icon_dynamic(args)
 
     local arch_icon_t = awful.tooltip {
         objects = {arch_icon},
-        timer_function = function()
+    margins = 10,
+    timer_function = function()
             return "Settings"
         end
     }

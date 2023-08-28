@@ -1,10 +1,18 @@
 local awful = require("awful")
 local wibox = require("wibox")
 local functions = require("functions")
-local wibar_widget_enhancor = functions.wi_widget_enhancor
 local wibar_widget_shape = functions.wi_widget_shape
 local backend = require("backend")
 local beautiful = require("beautiful")
+
+local wibar_widget_enhancor = function(widget, color)
+    local background_done = wibox.container.background(wibox.container.margin(widget, 6, 6, 6, 6), color,
+        wibar_widget_shape)
+
+    background_done.opacity = 1
+    return background_done
+
+end
 
 local function timeicon_function(args)
     local container_bool = args.container or "no"
@@ -24,6 +32,7 @@ local function timeicon_function(args)
 
     local time_t = awful.tooltip {
         objects = {time_containerized},
+        margins = 10,
         timer_function = function()
             return string.format(os.date('%B %d %Y, %A\n%T'))
         end
